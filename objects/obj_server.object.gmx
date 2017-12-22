@@ -130,7 +130,8 @@ if(_nid == socket_id) {
           <argument>
             <kind>1</kind>
             <string>var col = c_yellow;
-draw_text_colour(10, 10, "Server (" + string(connected_count) + ") Connected", col, col, col, col, 1);
+var str = "[Server] (" + string(connected_count) + ") Connected";
+text_draw(10, 10, str, spr_font_a, c_yellow, 1, 1, false);
 </string>
           </argument>
         </arguments>
