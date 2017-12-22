@@ -312,6 +312,7 @@
     <instance objName="obj_testammo" x="240" y="80" name="inst_2846EC47" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="btn_createServer" x="96" y="72" name="inst_D8697E00" locked="0" code="" scaleX="2.5" scaleY="4.5" colour="4294967295" rotation="0"/>
     <instance objName="btn_joinGame" x="112" y="248" name="inst_8522DBD2" locked="0" code="" scaleX="2.5" scaleY="4.25" colour="4294967295" rotation="0"/>
+    <instance objName="obj_view" x="176" y="160" name="inst_4F71B905" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

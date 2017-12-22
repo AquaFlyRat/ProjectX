@@ -6,12 +6,16 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
+    <sprite>sprites\spr_font_a</sprite>
+    <sprite>sprites\spr_font_b</sprite>
     <sprite>sprites\spr_solid</sprite>
     <sprite>sprites\spr_test</sprite>
     <sprite>sprites\spr_testgun</sprite>
     <sprite>sprites\spr_testbullet</sprite>
     <sprite>sprites\spr_testammo</sprite>
     <sprite>sprites\spr_col</sprite>
+    <sprite>sprites\spr_view</sprite>
+    <sprite>sprites\spr_display</sprite>
     <sprite>sprites\spr_server</sprite>
     <sprite>sprites\spr_server_client</sprite>
     <sprite>sprites\spr_client</sprite>
@@ -23,6 +27,11 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\distance.gml</script>
+    <scripts name="text">
+      <script>scripts\init_text.gml</script>
+      <script>scripts\text_draw.gml</script>
+      <script>scripts\text_length.gml</script>
+    </scripts>
     <scripts name="net">
       <script>scripts\create_server.gml</script>
       <script>scripts\create_client.gml</script>
@@ -47,8 +56,13 @@
       <object>objects\obj_server</object>
       <object>objects\obj_client</object>
     </objects>
+    <objects name="display">
+      <object>objects\obj_view</object>
+      <object>objects\obj_display</object>
+    </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_init</room>
     <room>rooms\rm_lobby</room>
   </rooms>
   <constants number="4">
