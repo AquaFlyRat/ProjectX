@@ -96,7 +96,8 @@ server_socket_id = -1;
           <argument>
             <kind>1</kind>
             <string>var col = c_yellow;
-draw_text_colour(10, 10, "Client", col, col, col, col, 1);
+var str = "[Client]";
+text_draw(10, 10, str, spr_font_a, col, 1, 1, false);
 </string>
           </argument>
         </arguments>
