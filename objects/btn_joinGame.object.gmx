@@ -254,7 +254,9 @@ if(active){
             <string>///connect
 if (active==2){
     var ip = n1 + "." + n2 + "." + n3 + "." + n4;
+    show_message(ip);
     var port = real(portname);
+    show_message(port);
     create_client(ip, port);
     /*var client = instance_create(0, 0, obj_client);
     client.client_socket_id = client_data[0];
