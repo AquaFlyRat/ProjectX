@@ -49,12 +49,14 @@
     <scripts name="net">
       <script>scripts\create_server.gml</script>
       <script>scripts\create_client.gml</script>
+      <script>scripts\player_hosting_server.gml</script>
     </scripts>
   </scripts>
   <objects name="objects">
     <objects name="mob">
       <object>objects\obj_bullet</object>
       <object>objects\obj_player</object>
+      <object>objects\obj_netplayer</object>
     </objects>
     <objects name="env">
       <object>objects\obj_wind</object>
@@ -86,11 +88,14 @@
     <room>rooms\rm_init</room>
     <room>rooms\rm_lobby</room>
   </rooms>
-  <constants number="4">
+  <constants number="7">
     <constant name="update_spd">3</constant>
-    <constant name="msg_move">1</constant>
     <constant name="max_clients">5</constant>
     <constant name="std_port">6510</constant>
+    <constant name="start_posx">128</constant>
+    <constant name="start_posy">160</constant>
+    <constant name="net_client_connected">1</constant>
+    <constant name="net_self_joined">2</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

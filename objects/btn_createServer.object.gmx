@@ -48,9 +48,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var server_socket = create_server();
-var server_obj = instance_create(0, 0, obj_server);
-server_obj.socket_id = server_socket;
+            <string>create_server();
 </string>
           </argument>
         </arguments>

@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>socket_id = -1;
 connected_count = 0;
+clients_list = ds_list_create();
 </string>
           </argument>
         </arguments>
@@ -77,11 +78,16 @@ if(_nid == socket_id) {
     var t = ds_map_find_value(async_load, "type");
     switch(t) {
     case network_type_connect:
-        connected_count = connected_count + 1; 
+        // A client has connected
+        on_client_connect(); 
         break;
     case network_type_disconnect:
-        connected_count = connected_count - 1;    
+        // A client has disconnected
+        on_client_disconnect(); 
         break;
+    case network_type_data:
+        // A client has sent us a message!
+        break;    
     }
 }
 </string>
@@ -130,7 +136,7 @@ if(_nid == socket_id) {
           <argument>
             <kind>1</kind>
             <string>var col = c_yellow;
-var str = "[Server]: (" + string(connected_count) + ") Connected";
+var str = "[Server]: (" + string(ds_list_size(clients_list)) + ") Connected";
 text_draw(10, 10, str, spr_font_a, col, 1, 1, false);
 </string>
           </argument>
