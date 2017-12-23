@@ -3,8 +3,8 @@
   <caption></caption>
   <width>320</width>
   <height>320</height>
-  <vsnap>16</vsnap>
-  <hsnap>16</hsnap>
+  <vsnap>5</vsnap>
+  <hsnap>5</hsnap>
   <isometric>0</isometric>
   <speed>60</speed>
   <persistent>0</persistent>
@@ -900,6 +900,34 @@
     <instance objName="obj_floor" x="144" y="240" name="inst_5E9C5E25" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_floor" x="128" y="240" name="inst_9A86B6C2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_floor" x="96" y="240" name="inst_B7CE0B7C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="250" y="60" name="inst_D05490CA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="260" y="60" name="inst_D2A4DE13" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="265" y="65" name="inst_0900FA41" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="255" y="65" name="inst_078E1EB4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="255" y="65" name="inst_DD6F5812" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="260" y="70" name="inst_2A04167C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="265" y="90" name="inst_91CF7635" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="55" y="60" name="inst_A8C893B6" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="60" y="65" name="inst_35C49EBB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="55" y="70" name="inst_42817BBE" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="65" y="60" name="inst_3D928EE9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="60" y="75" name="inst_2C649100" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="55" y="80" name="inst_45D1F38C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="135" y="60" name="inst_5ACC1396" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="130" y="65" name="inst_3874134B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="135" y="70" name="inst_3A249D94" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="125" y="60" name="inst_A40CFE76" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="125" y="85" name="inst_34366E5A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="65" y="195" name="inst_A53C5BFD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="60" y="190" name="inst_707C3E87" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="55" y="195" name="inst_B6E19F5C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="60" y="200" name="inst_0306200F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="70" y="190" name="inst_41A3FAE6" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="55" y="185" name="inst_F114C826" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="85" y="185" name="inst_ED5F0BAF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="210" y="165" name="inst_EBF5D64B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="200" y="155" name="inst_78B97868" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_toxicbarrel" x="225" y="165" name="inst_FC95B202" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

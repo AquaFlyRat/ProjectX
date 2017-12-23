@@ -15,12 +15,15 @@
     <sprite>sprites\spr_arch</sprite>
     <sprite>sprites\spr_roof_mask</sprite>
     <sprite>sprites\spr_wall</sprite>
+    <sprite>sprites\spr_footprints</sprite>
     <sprite>sprites\spr_hazmat_run</sprite>
     <sprite>sprites\spr_hazmat_idle</sprite>
     <sprite>sprites\spr_snowpart</sprite>
     <sprite>sprites\spr_grass</sprite>
+    <sprite>sprites\spr_toxicbarrel</sprite>
     <sprite>sprites\spr_tree</sprite>
     <sprite>sprites\spr_testgun</sprite>
+    <sprite>sprites\spr_aim</sprite>
     <sprite>sprites\spr_testbullet</sprite>
     <sprite>sprites\spr_testammo</sprite>
     <sprite>sprites\spr_col</sprite>
@@ -59,21 +62,23 @@
   <objects name="objects">
     <objects name="mob">
       <object>objects\obj_bullet</object>
+      <object>objects\obj_footprint</object>
       <object>objects\obj_player</object>
       <object>objects\obj_netplayer</object>
     </objects>
     <objects name="env">
       <object>objects\obj_wind</object>
+      <object>objects\par_col</object>
       <object>objects\obj_snowpart</object>
       <object>objects\obj_tree</object>
       <object>objects\obj_grass</object>
       <object>objects\obj_path</object>
       <object>objects\obj_floor</object>
-      <object>objects\par_col</object>
       <object>objects\obj_roof</object>
       <object>objects\obj_arch</object>
       <object>objects\obj_wall</object>
       <object>objects\obj_invcol</object>
+      <object>objects\obj_toxicbarrel</object>
       <object>objects\obj_testammo</object>
     </objects>
     <objects name="ui">
