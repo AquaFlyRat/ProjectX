@@ -77,13 +77,14 @@ if (active==1){
     if string_length(n3)&gt;=nlength &amp;&amp; nat ==3{nat++}
     //back
     if keyboard_check_pressed(vk_backspace){
-        if nat ==4 &amp;&amp; string_length(n4)&gt;0{n4 = string_copy(n4,0,string_length(n4)-1)}
-        if nat ==4 &amp;&amp; string_length(n4)&lt;=0{nat--;}
-        if nat ==3 &amp;&amp; string_length(n3)&gt;0{n3 = string_copy(n3,0,string_length(n3)-1)}
-        if nat ==3 &amp;&amp; string_length(n3)&lt;=0{nat--;}
-        if nat ==2 &amp;&amp; string_length(n2)&gt;0{n2 = string_copy(n2,0,string_length(n2)-1)}
-        if nat ==2 &amp;&amp; string_length(n2)&lt;=0{nat--;}
-        if nat ==1 &amp;&amp; string_length(n1)&gt;0{n1 = string_copy(n1,0,string_length(n1)-1)}
+        var i = 1;
+        if i &amp;&amp; nat ==4 &amp;&amp; string_length(n4)&gt;0{n4 = string_copy(n4,0,string_length(n4)-1);}
+        if i &amp;&amp; nat ==4 &amp;&amp; string_length(n4)&lt;=0{nat--;i--;}
+        if i &amp;&amp; nat ==3 &amp;&amp; string_length(n3)&gt;0{n3 = string_copy(n3,0,string_length(n3)-1);}
+        if i &amp;&amp; nat ==3 &amp;&amp; string_length(n3)&lt;=0{nat--;i--;}
+        if i &amp;&amp; nat ==2 &amp;&amp; string_length(n2)&gt;0{n2 = string_copy(n2,0,string_length(n2)-1);}
+        if i &amp;&amp; nat ==2 &amp;&amp; string_length(n2)&lt;=0{nat--;i--;}
+        if i &amp;&amp; nat ==1 &amp;&amp; string_length(n1)&gt;0{n1 = string_copy(n1,0,string_length(n1)-1);}
     }
     ///total
     var fill = "-------------"
@@ -93,6 +94,9 @@ if (active==1){
     var fn4 = string_copy(fill,0,3-string_length(n4));
     name = string(n1)+string(fn1)+"."+string(n2)+string(fn2)+"."+string(n3)+string(fn3)+"."+string(n4)+string(fn4);
     ///advance
+    if keyboard_check_released(vk_space) || keyboard_check_released(vk_tab){
+        nat++;
+    }
     if keyboard_check_released(vk_enter){
         active=2;
     }
