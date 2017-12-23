@@ -141,9 +141,12 @@ var vw = view_wview*obj_view.view_zoom;
 var vh = view_hview*obj_view.view_zoom;
 var sc = 1;
 var str = "[Server]: (" + string(connected_count) + ") Connected";
+var ip_str = "ip: 127.0.0.1";
+var port_str = "port: 6510";
+
 text_draw(vw*.5-text_length(str,spr_font_a,sc)*.5,10,str,spr_font_b,col,sc,1,false);
-text_draw(vw*.5-text_length("port:",spr_font_a,sc)*.5,vh-10,"port:",spr_font_b,col,sc,1,false);
-text_draw(vw*.5-text_length("ip:",spr_font_a,sc)*.5,vh-25,"ip:",spr_font_b,col,sc,1,false);
+text_draw(vw*.5-text_length(port_str,spr_font_a,sc)*.5,vh-10,port_str,spr_font_b,col,sc,1,false);
+text_draw(vw*.5-text_length(ip_str,spr_font_a,sc)*.5,vh-25,ip_str,spr_font_b,col,sc,1,false);
 </string>
           </argument>
         </arguments>
