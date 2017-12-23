@@ -10,7 +10,9 @@
     <sprite>sprites\spr_font_b</sprite>
     <sprite>sprites\spr_solid</sprite>
     <sprite>sprites\spr_path</sprite>
+    <sprite>sprites\spr_flooring</sprite>
     <sprite>sprites\spr_roof</sprite>
+    <sprite>sprites\spr_arch</sprite>
     <sprite>sprites\spr_roof_mask</sprite>
     <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_hazmat_run</sprite>
@@ -35,6 +37,7 @@
     <background>background\bg_roof</background>
     <background>background\bg_wall</background>
     <background>background\bg_path</background>
+    <background>background\bg_floor</background>
     <background>background\bg_ash</background>
   </backgrounds>
   <paths name="paths"/>
@@ -65,8 +68,10 @@
       <object>objects\obj_tree</object>
       <object>objects\obj_grass</object>
       <object>objects\obj_path</object>
+      <object>objects\obj_floor</object>
       <object>objects\par_col</object>
       <object>objects\obj_roof</object>
+      <object>objects\obj_arch</object>
       <object>objects\obj_wall</object>
       <object>objects\obj_invcol</object>
       <object>objects\obj_testammo</object>

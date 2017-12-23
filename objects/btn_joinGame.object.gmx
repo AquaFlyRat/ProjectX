@@ -148,6 +148,12 @@ if (active==3){
         ///add nickname to client
     }
 }
+if active{
+    if keyboard_check_pressed(vk_escape){
+        cooldown = 5;
+        active = 0;
+    }
+}
 //cooldown
 cooldown--;
 </string>
