@@ -43,6 +43,7 @@
     <script>scripts\distance.gml</script>
     <scripts name="text">
       <script>scripts\digit_check.gml</script>
+      <script>scripts\letter_check.gml</script>
       <script>scripts\init_text.gml</script>
       <script>scripts\text_draw.gml</script>
       <script>scripts\text_length.gml</script>

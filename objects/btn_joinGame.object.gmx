@@ -31,7 +31,9 @@ event_inherited();
 active = 0;
 portname = "";
 portname_length = 5;
-name = "";
+nickname = "";
+nn_length = 10;
+ipname = "";
 nlength = 3;
 nat = 1;
 n1 = "";
@@ -97,13 +99,14 @@ if (active==1){
     var fn3 = string_copy(fill,s,3-string_length(n3));
     if nat &lt;4{s = 4}else{s=0}
     var fn4 = string_copy(fill,s,3-string_length(n4));
-    name = string(n1)+string(fn1)+"."+string(n2)+string(fn2)+"."+string(n3)+string(fn3)+"."+string(n4)+string(fn4);
+    ipname = string(n1)+string(fn1)+"."+string(n2)+string(fn2)+"."+string(n3)+string(fn3)+"."+string(n4)+string(fn4);
     ///advance
     if keyboard_check_released(vk_space) || keyboard_check_released(vk_tab){
         if nat&lt;4{nat++;}
     }
-    if keyboard_check_released(vk_enter){
+    if keyboard_check_released(vk_enter) &amp;&amp; cooldown&lt;=0{
         active=2;
+        cooldown = 5;
     }
 }
 if (active==2){
@@ -119,6 +122,28 @@ if (active==2){
     }
     if string_length(portname)&gt;=portname_length{
         portname = string_copy(portname,0,portname_length)
+    }
+    if keyboard_check_released(vk_enter) &amp;&amp; cooldown&lt;=0{
+        active=3;
+        cooldown = 5;
+    }
+}
+if (active==3){
+    var k = "";
+    k = letter_check();
+    nickname+=k;
+    //back
+    if keyboard_check_pressed(vk_backspace){
+        if string_length(nickname)&lt;=0{
+            active--;
+        }
+        nickname = string_copy(nickname,0,string_length(nickname)-1)
+    }
+    if string_length(nickname)&gt;=nn_length{
+        nickname = string_copy(nickname,0,nn_length)
+    }
+    if keyboard_check_released(vk_enter) &amp;&amp; cooldown&lt;=0{
+        ///add nickname to client
     }
 }
 //cooldown
@@ -207,7 +232,7 @@ if(active){
     var vh = view_hview*obj_view.view_zoom;
     if active ==1{
         var p1 = "please enter ip and press [enter]";
-        var p2 = string(name)+"_----------------------";
+        var p2 = string(ipname)+"_----------------------";
             p2 = string_copy(p2,0,name_maxlength)
         var sc = 1;
         ///background
@@ -222,6 +247,19 @@ if(active){
         var p1 = "please enter port and press [enter]";
         var p2 = string(portname)+"_----------------------";
             p2 = string_copy(p2,0,portname_length)
+        var sc = 1;
+        ///background
+        draw_set_color(c_black);
+        draw_set_alpha(.5*guifade);
+        draw_rectangle(-8,-8,(vw)+8,(vh)+8,false);
+        ///prompt
+        text_draw(vw*.5-text_length(p1,spr_font_a,sc)*.5,vh*.4,p1,spr_font_a,c_white,sc,1*guifade,false);
+        text_draw(vw*.5-text_length(p2,spr_font_a,sc)*.5,vh*.5,p2,spr_font_a,c_white,sc,1*guifade,false);
+    }
+    if active ==3{
+        var p1 = "please enter nickname and press [enter]";
+        var p2 = string(nickname)+"_----------------------";
+            p2 = string_copy(p2,0,nn_length)
         var sc = 1;
         ///background
         draw_set_color(c_black);
@@ -257,7 +295,7 @@ if(active){
           <argument>
             <kind>1</kind>
             <string>///connect
-if (active==2){
+if (active==3) &amp;&amp; cooldown&lt;=0{
     var ip = n1 + "." + n2 + "." + n3 + "." + n4;
     show_message(ip);
     var port = real(portname);
