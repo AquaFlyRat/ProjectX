@@ -40,7 +40,7 @@ kickdir = 0;
 //gui
 image_alpha = 0;
 //zoom
-view_zoom =4;
+view_zoom =2;
 view_maxzoom = 4;
 view_minzoom = 2;
 zooming = 0;

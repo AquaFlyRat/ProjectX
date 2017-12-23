@@ -9,11 +9,20 @@
     <sprite>sprites\spr_font_a</sprite>
     <sprite>sprites\spr_font_b</sprite>
     <sprite>sprites\spr_solid</sprite>
-    <sprite>sprites\spr_test</sprite>
+    <sprite>sprites\spr_path</sprite>
+    <sprite>sprites\spr_roof</sprite>
+    <sprite>sprites\spr_roof_mask</sprite>
+    <sprite>sprites\spr_wall</sprite>
+    <sprite>sprites\spr_hazmat_run</sprite>
+    <sprite>sprites\spr_hazmat_idle</sprite>
+    <sprite>sprites\spr_snowpart</sprite>
+    <sprite>sprites\spr_grass</sprite>
+    <sprite>sprites\spr_tree</sprite>
     <sprite>sprites\spr_testgun</sprite>
     <sprite>sprites\spr_testbullet</sprite>
     <sprite>sprites\spr_testammo</sprite>
     <sprite>sprites\spr_col</sprite>
+    <sprite>sprites\spr_wind</sprite>
     <sprite>sprites\spr_view</sprite>
     <sprite>sprites\spr_display</sprite>
     <sprite>sprites\spr_server</sprite>
@@ -23,7 +32,12 @@
     <sprite>sprites\btn_server</sprite>
     <sprite>sprites\spr_client_ext</sprite>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\bg_roof</background>
+    <background>background\bg_wall</background>
+    <background>background\bg_path</background>
+    <background>background\bg_ash</background>
+  </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\distance.gml</script>
@@ -43,8 +57,15 @@
       <object>objects\obj_player</object>
     </objects>
     <objects name="env">
+      <object>objects\obj_wind</object>
+      <object>objects\obj_snowpart</object>
+      <object>objects\obj_tree</object>
+      <object>objects\obj_grass</object>
+      <object>objects\obj_path</object>
       <object>objects\par_col</object>
-      <object>objects\obj_solid</object>
+      <object>objects\obj_roof</object>
+      <object>objects\obj_wall</object>
+      <object>objects\obj_invcol</object>
       <object>objects\obj_testammo</object>
     </objects>
     <objects name="ui">

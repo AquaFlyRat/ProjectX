@@ -1,4 +1,4 @@
-///text_draw(x,y,string,font,col,scale,alpha,textwrap)
+///text_draw(x,y,string,font sprite,col,scale,alpha,textwrap)
 var xx = argument[0];
 var yy = argument[1];
 var str= string_lower(argument[2]);
