@@ -28,8 +28,7 @@
     <sprite>sprites\spr_server</sprite>
     <sprite>sprites\spr_server_client</sprite>
     <sprite>sprites\spr_client</sprite>
-    <sprite>sprites\btn_client</sprite>
-    <sprite>sprites\btn_server</sprite>
+    <sprite>sprites\spr_btn</sprite>
     <sprite>sprites\spr_client_ext</sprite>
   </sprites>
   <backgrounds name="background">
