@@ -70,7 +70,7 @@ if (active==1){
     if nat ==1 &amp;&amp; string_length(n1)&lt;nlength {n1+=k}
     if nat ==2 &amp;&amp; string_length(n2)&lt;nlength {n2+=k}
     if nat ==3 &amp;&amp; string_length(n3)&lt;nlength {n3+=k}
-    if nat ==4 &amp;&amp; string_length(n4)&lt;nlength {n4+=k}
+    if nat &gt;=4 &amp;&amp; string_length(n4)&lt;nlength {n4+=k}
     //n
     if string_length(n1)&gt;=nlength &amp;&amp; nat ==1{nat++}
     if string_length(n2)&gt;=nlength &amp;&amp; nat ==2{nat++}
@@ -78,24 +78,29 @@ if (active==1){
     //back
     if keyboard_check_pressed(vk_backspace){
         var i = 1;
-        if i &amp;&amp; nat ==4 &amp;&amp; string_length(n4)&gt;0{n4 = string_copy(n4,0,string_length(n4)-1);}
-        if i &amp;&amp; nat ==4 &amp;&amp; string_length(n4)&lt;=0{nat--;i--;}
-        if i &amp;&amp; nat ==3 &amp;&amp; string_length(n3)&gt;0{n3 = string_copy(n3,0,string_length(n3)-1);}
-        if i &amp;&amp; nat ==3 &amp;&amp; string_length(n3)&lt;=0{nat--;i--;}
-        if i &amp;&amp; nat ==2 &amp;&amp; string_length(n2)&gt;0{n2 = string_copy(n2,0,string_length(n2)-1);}
-        if i &amp;&amp; nat ==2 &amp;&amp; string_length(n2)&lt;=0{nat--;i--;}
-        if i &amp;&amp; nat ==1 &amp;&amp; string_length(n1)&gt;0{n1 = string_copy(n1,0,string_length(n1)-1);}
+        if i &amp;&amp; nat &gt;=4 &amp;&amp; string_length(n4)&gt;0{n4 = string_copy(n4,0,string_length(n4)-1);i--;}
+        if i &amp;&amp; nat &gt;=4 &amp;&amp; string_length(n4)&lt;=0{nat=3;}
+        if i &amp;&amp; nat ==3 &amp;&amp; string_length(n3)&gt;0{n3 = string_copy(n3,0,string_length(n3)-1);i--;}
+        if i &amp;&amp; nat ==3 &amp;&amp; string_length(n3)&lt;=0{nat=2;}
+        if i &amp;&amp; nat ==2 &amp;&amp; string_length(n2)&gt;0{n2 = string_copy(n2,0,string_length(n2)-1);i--;}
+        if i &amp;&amp; nat ==2 &amp;&amp; string_length(n2)&lt;=0{nat=1;}
+        if i &amp;&amp; nat ==1 &amp;&amp; string_length(n1)&gt;0{n1 = string_copy(n1,0,string_length(n1)-1);i--;}
     }
     ///total
-    var fill = "-------------"
-    var fn1 = string_copy(fill,0,3-string_length(n1));
-    var fn2 = string_copy(fill,0,3-string_length(n2));
-    var fn3 = string_copy(fill,0,3-string_length(n3));
-    var fn4 = string_copy(fill,0,3-string_length(n4));
+    var fill = "_-------------"
+    var s = 0;
+    if nat !=1{s = 4}else{s=0}
+    var fn1 = string_copy(fill,s,3-string_length(n1));
+    if nat !=2{s = 4}else{s=0}
+    var fn2 = string_copy(fill,s,3-string_length(n2));
+    if nat !=3{s = 4}else{s=0}
+    var fn3 = string_copy(fill,s,3-string_length(n3));
+    if nat &lt;4{s = 4}else{s=0}
+    var fn4 = string_copy(fill,s,3-string_length(n4));
     name = string(n1)+string(fn1)+"."+string(n2)+string(fn2)+"."+string(n3)+string(fn3)+"."+string(n4)+string(fn4);
     ///advance
     if keyboard_check_released(vk_space) || keyboard_check_released(vk_tab){
-        nat++;
+        if nat&lt;4{nat++;}
     }
     if keyboard_check_released(vk_enter){
         active=2;
@@ -202,7 +207,7 @@ if(active){
     var vh = view_hview*obj_view.view_zoom;
     if active ==1{
         var p1 = "please enter ip and press [enter]";
-        var p2 = string(name)+"-----------------------";
+        var p2 = string(name)+"_----------------------";
             p2 = string_copy(p2,0,name_maxlength)
         var sc = 1;
         ///background
@@ -215,7 +220,7 @@ if(active){
     }
     if active ==2{
         var p1 = "please enter port and press [enter]";
-        var p2 = string(portname)+"-----------------------";
+        var p2 = string(portname)+"_----------------------";
             p2 = string_copy(p2,0,portname_length)
         var sc = 1;
         ///background

@@ -73,5 +73,6 @@
     <frame index="50">images\spr_font_b_50.png</frame>
     <frame index="51">images\spr_font_b_51.png</frame>
     <frame index="52">images\spr_font_b_52.png</frame>
+    <frame index="53">images\spr_font_b_53.png</frame>
   </frames>
 </sprite>
