@@ -241,7 +241,7 @@ if(active){
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>self</whoName>
+        <whoName>btn_joinGame</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
@@ -249,10 +249,13 @@ if(active){
             <kind>1</kind>
             <string>///connect
 if (active==2){
-    var client_data = create_client();
-    var client = instance_create(0, 0, obj_client);
+    var ip = n1 + "." + n2 + "." + n3 + "." + n4;
+    var port = real(portname);
+    create_client(ip, port);
+    /*var client = instance_create(0, 0, obj_client);
     client.client_socket_id = client_data[0];
     client.server_socket_id = client_data[1];
+    */
     active = 0;
 }
 </string>

@@ -4,7 +4,7 @@ var server = network_create_server(network_socket_tcp, std_port, max_clients);
 var server_controller = instance_create(0, 0, obj_server);
 server_controller.socket_id = server;
 
-create_client();
+create_client("127.0.0.1", std_port);
 
 return server_controller;
 
