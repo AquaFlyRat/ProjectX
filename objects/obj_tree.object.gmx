@@ -59,6 +59,7 @@ if instance_nearest(x,y,obj_tree) !=id{
           <argument>
             <kind>1</kind>
             <string>///wave
+draw_set_alpha(1);
 var tex = sprite_get_texture(sprite_index,floor(image_index));
 draw_primitive_begin_texture(pr_trianglelist,tex);
 var sw = cos(swayat)*swayscale;
