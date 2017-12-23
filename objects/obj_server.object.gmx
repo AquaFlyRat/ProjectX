@@ -135,9 +135,15 @@ if(_nid == socket_id) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var col = c_yellow;
-var str = "[Server]: (" + string(ds_list_size(clients_list)) + ") Connected";
-text_draw(10, 10, str, spr_font_a, col, 1, 1, false);
+            <string>///draw
+var col = c_white;
+var vw = view_wview*obj_view.view_zoom;
+var vh = view_hview*obj_view.view_zoom;
+var sc = 1;
+var str = "[Server]: (" + string(connected_count) + ") Connected";
+text_draw(vw*.5-text_length(str,spr_font_a,sc)*.5,10,str,spr_font_b,col,sc,1,false);
+text_draw(vw*.5-text_length("port:",spr_font_a,sc)*.5,vh-10,"port:",spr_font_b,col,sc,1,false);
+text_draw(vw*.5-text_length("ip:",spr_font_a,sc)*.5,vh-25,"ip:",spr_font_b,col,sc,1,false);
 </string>
           </argument>
         </arguments>
