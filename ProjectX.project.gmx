@@ -79,6 +79,7 @@
     <objects name="net">
       <object>objects\obj_server</object>
       <object>objects\obj_client</object>
+      <object>objects\obj_serverClient</object>
     </objects>
     <objects name="display">
       <object>objects\obj_view</object>

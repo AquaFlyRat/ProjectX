@@ -50,7 +50,7 @@ client_id = -1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>network_destroy(client_socket_id);
+            <string>network_destroy(socket_id);
 </string>
           </argument>
         </arguments>
@@ -99,7 +99,7 @@ if(_nid == socket_id) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>network_destroy(client_socket_id);
+            <string>network_destroy(socket_id);
 </string>
           </argument>
         </arguments>

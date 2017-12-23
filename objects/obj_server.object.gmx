@@ -140,7 +140,7 @@ var col = c_white;
 var vw = view_wview*obj_view.view_zoom;
 var vh = view_hview*obj_view.view_zoom;
 var sc = 1;
-var str = "[Server]: (" + string(connected_count) + ") Connected";
+var str = "[Server]: (" + string(ds_list_size(clients_list)) + ") Connected";
 var ip_str = "ip: 127.0.0.1";
 var port_str = "port: 6510";
 

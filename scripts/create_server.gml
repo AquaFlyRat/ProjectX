@@ -12,17 +12,23 @@ return server_controller;
 // Called from obj_server
 
 var sock = ds_map_find_value(async_load, "socket");  
-var client = instance_create(0, 0, obj_client);
+var client = instance_create(0, 0, obj_serverClient);
 client.socket_id = sock;
 client.client_id = connected_count++;
-
 
 ds_list_add(clients_list, client);    
 
 
 #define on_client_disconnect
-with(obj_server) {
-    var sock = ds_map_find_value(async_load, "socket");
-    var index_of_sock = ds_list_find_index(clients_list, sock);
-    ds_list_delete(clients_list, index_of_sock);
+var sock = ds_map_find_value(async_load, "socket");
+
+for(var i = 0; i < ds_list_size(clients_list); i++) {
+    var client = ds_list_find_value(clients_list, i);
+    if(not is_undefined(client)) {
+        if(client.socket_id == sock) {
+            ds_list_delete(clients_list, i);
+            break;
+        }
+    }
 }
+
