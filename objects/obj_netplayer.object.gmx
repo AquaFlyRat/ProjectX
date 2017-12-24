@@ -84,9 +84,11 @@ if(distance(next_x, next_y, prev_x, prev_y) &gt; 0.5){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = lerp(prev_x, next_x, 1 / update_spd * time);
+            <string>depth = -y;
+x = lerp(prev_x, next_x, 1 / update_spd * time);
 y = lerp(prev_y, next_y, 1 / update_spd * time);
 time++;
+
 </string>
           </argument>
         </arguments>
