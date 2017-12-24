@@ -100,14 +100,13 @@
     <room>rooms\rm_init</room>
     <room>rooms\rm_lobby</room>
   </rooms>
-  <constants number="7">
+  <constants number="6">
     <constant name="update_spd">3</constant>
     <constant name="max_clients">5</constant>
     <constant name="std_port">6510</constant>
     <constant name="start_posx">128</constant>
     <constant name="start_posy">160</constant>
-    <constant name="net_client_connected">1</constant>
-    <constant name="net_self_joined">2</constant>
+    <constant name="netc_move">1</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
