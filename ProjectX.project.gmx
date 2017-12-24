@@ -72,14 +72,14 @@
       <object>objects\obj_snowpart</object>
       <object>objects\obj_tree</object>
       <object>objects\obj_grass</object>
+      <object>objects\obj_toxicbarrel</object>
+      <object>objects\obj_ammo</object>
       <object>objects\obj_path</object>
       <object>objects\obj_floor</object>
       <object>objects\obj_roof</object>
       <object>objects\obj_arch</object>
       <object>objects\obj_wall</object>
       <object>objects\obj_invcol</object>
-      <object>objects\obj_toxicbarrel</object>
-      <object>objects\obj_testammo</object>
     </objects>
     <objects name="ui">
       <object>objects\obj_btn</object>

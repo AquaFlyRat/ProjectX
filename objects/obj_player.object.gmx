@@ -199,9 +199,9 @@ if (shoot) &amp;&amp; (alarm[0] = -1){
           <argument>
             <kind>1</kind>
             <string>///ammo
-if place_meeting(x,y,obj_testammo){
+if place_meeting(x,y,obj_ammo){
     if ammo&lt;weapon[gun,wp_maxammo]{
-        with(instance_nearest(x,y,obj_testammo)){
+        with(instance_nearest(x,y,obj_ammo)){
             instance_destroy();
         }
         ammo+=5;
