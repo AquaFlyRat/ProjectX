@@ -23,6 +23,11 @@ while(true) {
         var xx = buffer_read(buffer, buffer_u16);
         var yy = buffer_read(buffer, buffer_u16);
         
+        with(client_map[? string(sock_id)]) {
+            x = xx;
+            y = yy;
+        }
+        
         buffer_seek(send_buffer, buffer_seek_start, 0);
         buffer_write(send_buffer, buffer_u8, netc_move);
         buffer_write(send_buffer, buffer_u16, curr_client_id);
@@ -55,8 +60,18 @@ client_map[? string(sock)] = client;
 
 #define server_recieve_client_disconnect
 var sock = ds_map_find_value(async_load, "socket");
+
+var client_id_ = client_map[? string(sock)].client_id;
+
 with(client_map[? string(sock)]) {
     instance_destroy();
 }
 
 ds_map_delete(client_map, string(sock));
+
+buffer_seek(send_buffer, buffer_seek_start, 0);
+buffer_write(send_buffer, buffer_u8, netc_player_leave);
+buffer_write(send_buffer, buffer_u16, client_id_);
+with(obj_serverClient) {
+    network_send_raw(self.socket_id, other.send_buffer, 3);
+}
