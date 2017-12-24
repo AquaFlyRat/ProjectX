@@ -11,6 +11,7 @@
     <sprite>sprites\spr_solid</sprite>
     <sprite>sprites\spr_path</sprite>
     <sprite>sprites\spr_flooring</sprite>
+    <sprite>sprites\spr_puddle</sprite>
     <sprite>sprites\spr_roof</sprite>
     <sprite>sprites\spr_arch</sprite>
     <sprite>sprites\spr_roof_mask</sprite>
@@ -24,6 +25,9 @@
     <sprite>sprites\spr_snowpart</sprite>
     <sprite>sprites\spr_grass</sprite>
     <sprite>sprites\spr_toxicbarrel</sprite>
+    <sprite>sprites\spr_explosion</sprite>
+    <sprite>sprites\spr_explosivebarrel</sprite>
+    <sprite>sprites\spr_explosivebarrel_dead</sprite>
     <sprite>sprites\spr_tree</sprite>
     <sprite>sprites\spr_testgun</sprite>
     <sprite>sprites\spr_aim</sprite>
@@ -72,6 +76,9 @@
     </objects>
     <objects name="env">
       <object>objects\obj_toxicbarrel</object>
+      <object>objects\obj_explosivebarrel_dead</object>
+      <object>objects\obj_explosivebarrel</object>
+      <object>objects\obj_explosion</object>
       <object>objects\obj_toxic</object>
       <object>objects\obj_wind</object>
       <object>objects\par_col</object>
@@ -79,6 +86,7 @@
       <object>objects\obj_tree</object>
       <object>objects\obj_grass</object>
       <object>objects\obj_ammo</object>
+      <object>objects\obj_puddle</object>
       <object>objects\obj_path</object>
       <object>objects\obj_floor</object>
       <object>objects\obj_roof</object>

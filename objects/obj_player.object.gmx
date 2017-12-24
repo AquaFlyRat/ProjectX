@@ -174,6 +174,7 @@ if mouse_check_button(mb_left) &amp;&amp; !idle{
 //shoot timer
 if (shoot) &amp;&amp; (alarm[0] = -1){
     if ammo&gt;=0{
+        obj_view.shake+=2;
         //create bullet
         ammo--;
         var ofx = 5*image_xscale;
@@ -211,17 +212,62 @@ if (shoot) &amp;&amp; (alarm[0] = -1){
           <argument>
             <kind>1</kind>
             <string>///damage
-if place_meeting(x,y,obj_bullet){
-    var b = instance_place(x,y,obj_bullet);
-    if b.par!=id{
-        hp--;
-        repeat(3){
+if instance_exists(obj_bullet){
+    if place_meeting(x,y,obj_bullet){
+        var b = instance_place(x,y,obj_bullet);
+        if b.par!=id &amp;&amp; b.activ{
+            hp--;
+            obj_view.shake+=5;
+            repeat(3){
+                instance_create(x+irandom_range(-6,6),y+irandom_range(-4,4),obj_blood);
+            }
+            with(b){
+                image_index = 0;
+                instance_destroy();
+                activ = 0;
+            }
+        }
+    }
+}
+if instance_exists(obj_explosion){
+    if place_meeting(x,y,obj_explosion){
+        var e = instance_place(x,y,obj_explosion);
+        //die
+        hp-=10;
+        //knockback
+        hspd = sign(x-e.x)*irandom_range(4,7);
+        vspd = sign(y-e.y)*irandom_range(4,7);
+        ///blood
+        repeat(6){
             instance_create(x+irandom_range(-6,6),y+irandom_range(-4,4),obj_blood);
         }
-        with(b){
-            image_index = 0;
-            instance_destroy();
-        }
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///bleed out
+if hp&lt;=1 &amp;&amp; (abs(hspd)&gt;0.5 || abs(vspd)&gt;0.5){
+    var r = 5;
+    if r = irandom(r){
+        instance_create(x+irandom_range(-6,6),y+irandom_range(-6,6),obj_blood);
     }
 }
 </string>
