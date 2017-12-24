@@ -138,7 +138,12 @@ if(next_x &gt; prev_x ) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,c_white,image_alpha);
+            <string>var ofx = 7*image_xscale;
+var ofy = -3;
+var inc_dir = 0; 
+if image_xscale&lt;0{inc_dir = 180}
+draw_sprite_ext(spr_testgun,0,x+ofx,y+ofy,image_xscale,image_yscale,0/*gun_dir+inc_dir*/,c_white,image_alpha);
+draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,c_white,image_alpha);
 </string>
           </argument>
         </arguments>

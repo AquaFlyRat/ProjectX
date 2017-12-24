@@ -26,6 +26,7 @@ while(true) {
         }
         ds_map_delete(client_map, string(cid));
         break;
+        
     case netc_move:
         var client_id_ = buffer_read(buffer, buffer_u16);
         var xx = buffer_read(buffer, buffer_u16);
@@ -33,6 +34,7 @@ while(true) {
         
         if(ds_map_exists(client_map, string(client_id_))) {
             var found_client = client_map[? string(client_id_)];
+            
             found_client.next_x = xx;
             found_client.next_y = yy;
             found_client.prev_x = found_client.x;

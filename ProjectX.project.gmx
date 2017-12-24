@@ -61,9 +61,13 @@
       <script>scripts\text_length.gml</script>
     </scripts>
     <scripts name="net">
-      <script>scripts\create_server.gml</script>
-      <script>scripts\create_client.gml</script>
       <script>scripts\player_hosting_server.gml</script>
+      <scripts name="server">
+        <script>scripts\create_server.gml</script>
+      </scripts>
+      <scripts name="client">
+        <script>scripts\create_client.gml</script>
+      </scripts>
     </scripts>
   </scripts>
   <objects name="objects">

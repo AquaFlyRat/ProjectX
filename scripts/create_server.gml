@@ -23,6 +23,11 @@ while(true) {
         var xx = buffer_read(buffer, buffer_u16);
         var yy = buffer_read(buffer, buffer_u16);
         
+        with(client_map[? string(sock_id)]) {
+            x = xx;
+            y = yy;
+        }
+        
         buffer_seek(send_buffer, buffer_seek_start, 0);
         buffer_write(send_buffer, buffer_u8, netc_move);
         buffer_write(send_buffer, buffer_u16, curr_client_id);
