@@ -69,7 +69,8 @@ view_hview = obj_display.ideal_height/view_zoom;
           <argument>
             <kind>1</kind>
             <string>///move camera
-shake = clamp(shake,0,2);
+shake = clamp(shake,0,45);
+view_angle = random_range(-shake,shake);
 shakex = random_range(-shake,shake)/view_zoom;
 shakey = random_range(-shake,shake)/view_zoom;
 kick = lerp(kick,0,.1);

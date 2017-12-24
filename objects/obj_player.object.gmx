@@ -41,6 +41,8 @@ weapon[0,wp_speed] = 10;
 //vars
 gun = 0;
 ammo = weapon[gun,wp_maxammo];
+hp = 10;
+//motion
 spdlerp = .1;
 frclerp = .2;
 spdmax = 2;
@@ -96,8 +98,15 @@ shoot = 0;
           <argument>
             <kind>1</kind>
             <string>///move
-var ud = (keyboard_check(ord("S")) || keyboard_check(vk_down))-(keyboard_check(ord("W")) || keyboard_check(vk_up));
-var lr = (keyboard_check(ord("D")) || keyboard_check(vk_right))-(keyboard_check(ord("A")) || keyboard_check(vk_left));
+var idle = 0;
+if (room == rm_lobby) &amp;&amp; (instance_exists(btn_joinGame)) &amp;&amp; (btn_joinGame.active){idle =1;}
+if !idle{
+    var ud = (keyboard_check(ord("S")) || keyboard_check(vk_down))-(keyboard_check(ord("W")) || keyboard_check(vk_up));
+    var lr = (keyboard_check(ord("D")) || keyboard_check(vk_right))-(keyboard_check(ord("A")) || keyboard_check(vk_left));
+}else{
+    ud = 0;
+    lr = 0;
+}
 var hsp = lr*spdmax;
 var vsp = ud*spdmax;
 //hspeed
@@ -154,14 +163,18 @@ y+=vspd;        //advance vspd
           <argument>
             <kind>1</kind>
             <string>///shoot
+var idle = 0;
+if (room == rm_lobby) &amp;&amp; (instance_exists(btn_joinGame)) &amp;&amp; ((btn_joinGame.active) || (btn_joinGame.cooldown&gt;0) || (btn_joinGame.guifade&gt;.1)){idle =1;}
+if (room == rm_lobby) &amp;&amp; (instance_exists(btn_createServer)) &amp;&amp; place_meeting(mouse_x,mouse_y,btn_createServer){idle = 1;}
 gun_dir = point_direction(x+5*image_xscale,y-3,mouse_x,mouse_y);
 //shooting
-if mouse_check_button(mb_left){
+if mouse_check_button(mb_left) &amp;&amp; !idle{
     shoot = 1;
 }
 //shoot timer
 if (shoot) &amp;&amp; (alarm[0] = -1){
     if ammo&gt;=0{
+        obj_view.shake+=2;
         //create bullet
         ammo--;
         var ofx = 5*image_xscale;
@@ -198,10 +211,89 @@ if (shoot) &amp;&amp; (alarm[0] = -1){
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///damage
+if instance_exists(obj_bullet){
+    if place_meeting(x,y,obj_bullet){
+        var b = instance_place(x,y,obj_bullet);
+        if b.par!=id &amp;&amp; b.activ{
+            hp--;
+            obj_view.shake+=5;
+            repeat(3){
+                instance_create(x+irandom_range(-6,6),y+irandom_range(-4,4),obj_blood);
+            }
+            with(b){
+                image_index = 0;
+                instance_destroy();
+                activ = 0;
+            }
+        }
+    }
+}
+if instance_exists(obj_explosion){
+    if place_meeting(x,y,obj_explosion){
+        var e = instance_place(x,y,obj_explosion);
+        //die
+        hp-=10;
+        //knockback
+        hspd = sign(x-e.x)*irandom_range(4,7);
+        vspd = sign(y-e.y)*irandom_range(4,7);
+        ///blood
+        repeat(6){
+            instance_create(x+irandom_range(-6,6),y+irandom_range(-4,4),obj_blood);
+        }
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///bleed out
+if hp&lt;=1 &amp;&amp; (abs(hspd)&gt;0.5 || abs(vspd)&gt;0.5){
+    var r = 5;
+    if r = irandom(r){
+        instance_create(x+irandom_range(-6,6),y+irandom_range(-6,6),obj_blood);
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///ammo
-if place_meeting(x,y,obj_testammo){
+if place_meeting(x,y,obj_ammo){
     if ammo&lt;weapon[gun,wp_maxammo]{
-        with(instance_nearest(x,y,obj_testammo)){
+        with(instance_nearest(x,y,obj_ammo)){
             instance_destroy();
         }
         ammo+=5;

@@ -60,4 +60,3 @@ with(client_map[? string(sock)]) {
 }
 
 ds_map_delete(client_map, string(sock));
-

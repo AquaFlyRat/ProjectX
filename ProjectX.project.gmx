@@ -11,6 +11,7 @@
     <sprite>sprites\spr_solid</sprite>
     <sprite>sprites\spr_path</sprite>
     <sprite>sprites\spr_flooring</sprite>
+    <sprite>sprites\spr_puddle</sprite>
     <sprite>sprites\spr_roof</sprite>
     <sprite>sprites\spr_arch</sprite>
     <sprite>sprites\spr_roof_mask</sprite>
@@ -18,9 +19,15 @@
     <sprite>sprites\spr_footprints</sprite>
     <sprite>sprites\spr_hazmat_run</sprite>
     <sprite>sprites\spr_hazmat_idle</sprite>
+    <sprite>sprites\spr_hazmat_dead</sprite>
+    <sprite>sprites\spr_blood</sprite>
+    <sprite>sprites\spr_toxic</sprite>
     <sprite>sprites\spr_snowpart</sprite>
     <sprite>sprites\spr_grass</sprite>
     <sprite>sprites\spr_toxicbarrel</sprite>
+    <sprite>sprites\spr_explosion</sprite>
+    <sprite>sprites\spr_explosivebarrel</sprite>
+    <sprite>sprites\spr_explosivebarrel_dead</sprite>
     <sprite>sprites\spr_tree</sprite>
     <sprite>sprites\spr_testgun</sprite>
     <sprite>sprites\spr_aim</sprite>
@@ -62,24 +69,30 @@
   <objects name="objects">
     <objects name="mob">
       <object>objects\obj_bullet</object>
+      <object>objects\obj_blood</object>
       <object>objects\obj_footprint</object>
       <object>objects\obj_player</object>
       <object>objects\obj_netplayer</object>
     </objects>
     <objects name="env">
+      <object>objects\obj_toxicbarrel</object>
+      <object>objects\obj_explosivebarrel_dead</object>
+      <object>objects\obj_explosivebarrel</object>
+      <object>objects\obj_explosion</object>
+      <object>objects\obj_toxic</object>
       <object>objects\obj_wind</object>
       <object>objects\par_col</object>
       <object>objects\obj_snowpart</object>
       <object>objects\obj_tree</object>
       <object>objects\obj_grass</object>
+      <object>objects\obj_ammo</object>
+      <object>objects\obj_puddle</object>
       <object>objects\obj_path</object>
       <object>objects\obj_floor</object>
       <object>objects\obj_roof</object>
       <object>objects\obj_arch</object>
       <object>objects\obj_wall</object>
       <object>objects\obj_invcol</object>
-      <object>objects\obj_toxicbarrel</object>
-      <object>objects\obj_testammo</object>
     </objects>
     <objects name="ui">
       <object>objects\obj_btn</object>

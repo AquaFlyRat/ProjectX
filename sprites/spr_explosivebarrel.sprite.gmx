@@ -20,8 +20,8 @@
   <width>16</width>
   <height>16</height>
   <frames>
-    <frame index="0">images\spr_toxicbarrel_0.png</frame>
-    <frame index="1">images\spr_toxicbarrel_1.png</frame>
-    <frame index="2">images\spr_toxicbarrel_2.png</frame>
+    <frame index="0">images\spr_explosivebarrel_0.png</frame>
+    <frame index="1">images\spr_explosivebarrel_1.png</frame>
+    <frame index="2">images\spr_explosivebarrel_2.png</frame>
   </frames>
 </sprite>
