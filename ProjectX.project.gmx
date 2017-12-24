@@ -25,6 +25,7 @@
     <sprite>sprites\spr_snowpart</sprite>
     <sprite>sprites\spr_grass</sprite>
     <sprite>sprites\spr_toxicbarrel</sprite>
+    <sprite>sprites\spr_smoke</sprite>
     <sprite>sprites\spr_explosion</sprite>
     <sprite>sprites\spr_explosivebarrel</sprite>
     <sprite>sprites\spr_explosivebarrel_dead</sprite>
@@ -82,6 +83,7 @@
       <object>objects\obj_toxicbarrel</object>
       <object>objects\obj_explosivebarrel_dead</object>
       <object>objects\obj_explosivebarrel</object>
+      <object>objects\obj_smoke</object>
       <object>objects\obj_explosion</object>
       <object>objects\obj_toxic</object>
       <object>objects\obj_wind</object>
