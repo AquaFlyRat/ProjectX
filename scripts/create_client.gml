@@ -26,8 +26,13 @@ while(true) {
         
         if(ds_map_exists(client_map, string(client_id_))) {
             var found_client = client_map[? string(client_id_)];
-            found_client.x = xx;
-            found_client.y = yy;
+            /*found_client.x = xx;
+            found_client.y = yy;*/
+            found_client.next_x = xx;
+            found_client.next_y = yy;
+            found_client.prev_x = found_client.x;
+            found_client.prev_y = found_client.y;
+            found_client.time = 0;
         } else {
             var c = instance_create(xx, yy, obj_netplayer);
             client_map[? string(client_id_)] = c;
@@ -47,4 +52,3 @@ buffer_write(send_buffer, buffer_u8, netc_move);
 buffer_write(send_buffer, buffer_u16, round(obj_player.x));
 buffer_write(send_buffer, buffer_u16, round(obj_player.y));
 network_send_raw(socket_id, send_buffer, buffer_tell(send_buffer));
-
