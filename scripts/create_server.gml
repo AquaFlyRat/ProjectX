@@ -55,7 +55,6 @@ client_map[? string(sock)] = client;
 
 #define server_recieve_client_disconnect
 var sock = ds_map_find_value(async_load, "socket");
-
 with(client_map[? string(sock)]) {
     instance_destroy();
 }

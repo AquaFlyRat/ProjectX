@@ -48,6 +48,7 @@ hspd = 0;
 vspd = 0;
 gun_dir = 0;
 shoot = 0;
+ftat = 1;
 </string>
           </argument>
         </arguments>
@@ -153,7 +154,7 @@ y+=vspd;        //advance vspd
           <argument>
             <kind>1</kind>
             <string>///shoot
-gun_dir = point_direction(x,y,mouse_x,mouse_y);
+gun_dir = point_direction(x+5*image_xscale,y-3,mouse_x,mouse_y);
 //shooting
 if mouse_check_button(mb_left){
     shoot = 1;
@@ -240,6 +241,36 @@ if distance(x,y,xprevious,yprevious)&gt;.5{
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///footprints
+if sprite_index == spr_hazmat_run{
+    if image_index mod 2 = 0{
+        var dir = point_direction(xprevious,yprevious,x,y);
+        var xx = ftat*2;
+        var ft = instance_create(x+xx,y,obj_footprint);
+        ft.image_angle = dir;
+        ftat = -ftat;
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="0">
       <action>
@@ -267,7 +298,13 @@ if image_xscale&lt;0{inc_dir = 180}
 draw_sprite_ext(weapon[gun,wp_weapontype],0,x+ofx,y+ofy,image_xscale,image_yscale,gun_dir+inc_dir,c_white,image_alpha);
 //self
 draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,c_white,image_alpha);
-
+//aim
+/*
+ofx = 5*image_xscale;
+ofy = -3;
+ofx+=lengthdir_x(24,gun_dir);
+ofy+=lengthdir_y(24,gun_dir);
+draw_sprite_ext(spr_aim,0,x+ofx,y+ofy,.5,.5,gun_dir,c_white,1);
 </string>
           </argument>
         </arguments>
