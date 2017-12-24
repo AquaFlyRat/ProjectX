@@ -96,8 +96,15 @@ shoot = 0;
           <argument>
             <kind>1</kind>
             <string>///move
-var ud = (keyboard_check(ord("S")) || keyboard_check(vk_down))-(keyboard_check(ord("W")) || keyboard_check(vk_up));
-var lr = (keyboard_check(ord("D")) || keyboard_check(vk_right))-(keyboard_check(ord("A")) || keyboard_check(vk_left));
+var idle = 0;
+if (room == rm_lobby) &amp;&amp; (instance_exists(btn_joinGame)) &amp;&amp; (btn_joinGame.active){idle =1;}
+if !idle{
+    var ud = (keyboard_check(ord("S")) || keyboard_check(vk_down))-(keyboard_check(ord("W")) || keyboard_check(vk_up));
+    var lr = (keyboard_check(ord("D")) || keyboard_check(vk_right))-(keyboard_check(ord("A")) || keyboard_check(vk_left));
+}else{
+    ud = 0;
+    lr = 0;
+}
 var hsp = lr*spdmax;
 var vsp = ud*spdmax;
 //hspeed
@@ -154,9 +161,11 @@ y+=vspd;        //advance vspd
           <argument>
             <kind>1</kind>
             <string>///shoot
+var idle = 0;
+if (room == rm_lobby) &amp;&amp; (instance_exists(btn_joinGame)) &amp;&amp; ((btn_joinGame.active) || (btn_joinGame.cooldown&gt;0) || (btn_joinGame.guifade&gt;.1)){idle =1;}
 gun_dir = point_direction(x+5*image_xscale,y-3,mouse_x,mouse_y);
 //shooting
-if mouse_check_button(mb_left){
+if mouse_check_button(mb_left) &amp;&amp; !idle{
     shoot = 1;
 }
 //shoot timer
