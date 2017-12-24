@@ -32,7 +32,7 @@ client_map = ds_map_create();
 send_buffer = buffer_create(256, buffer_fixed, 1);
 
 alarm[0] = update_spd;
-show_message("Creating client!");
+
 </string>
           </argument>
         </arguments>
