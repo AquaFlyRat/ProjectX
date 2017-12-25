@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_angle = irandom(360);
+            <string>///wooo
+image_angle = irandom(360);
 image_speed = .25;
 depth = -10000;
 </string>

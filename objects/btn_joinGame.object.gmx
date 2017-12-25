@@ -30,8 +30,7 @@ event_inherited();
 text = "client";
 //stuff
 active = 0;
-portname = "";
-portname_length = 5;
+portname = "6510";
 nickname = "";
 nn_length = 10;
 ipname = "";
@@ -112,25 +111,6 @@ if (active==1){
     }
 }
 if (active==2){
-    var k = "";
-    k = digit_check();
-    portname+=k;
-    //back
-    if keyboard_check_pressed(vk_backspace){
-        if string_length(portname)&lt;=0{
-            active--;
-        }
-        portname = string_copy(portname,0,string_length(portname)-1)
-    }
-    if string_length(portname)&gt;=portname_length{
-        portname = string_copy(portname,0,portname_length)
-    }
-    if keyboard_check_released(vk_enter) &amp;&amp; cooldown&lt;=0{
-        active=3;
-        cooldown = 5;
-    }
-}
-if (active==3){
     var k = "";
     k = letter_check();
     nickname+=k;
@@ -252,19 +232,6 @@ if(active){
         text_draw(vw*.5-text_length(p2,spr_font_a,sc)*.5,vh*.5,p2,spr_font_a,c_white,sc,1*guifade,false);
     }
     if active ==2{
-        var p1 = "please enter port and press [enter]";
-        var p2 = string(portname)+"_----------------------";
-            p2 = string_copy(p2,0,portname_length)
-        var sc = 1;
-        ///background
-        draw_set_color(c_black);
-        draw_set_alpha(.5*guifade);
-        draw_rectangle(-8,-8,(vw)+8,(vh)+8,false);
-        ///prompt
-        text_draw(vw*.5-text_length(p1,spr_font_a,sc)*.5,vh*.4,p1,spr_font_a,c_white,sc,1*guifade,false);
-        text_draw(vw*.5-text_length(p2,spr_font_a,sc)*.5,vh*.5,p2,spr_font_a,c_white,sc,1*guifade,false);
-    }
-    if active ==3{
         var p1 = "please enter nickname and press [enter]";
         var p2 = string(nickname)+"_----------------------";
             p2 = string_copy(p2,0,nn_length)
@@ -280,6 +247,7 @@ if(active){
 }else{
     if guifade&gt;0{guifade = lerp(guifade,0,.1)}
 }
+draw_set_alpha(1);
 </string>
           </argument>
         </arguments>
@@ -303,7 +271,7 @@ if(active){
           <argument>
             <kind>1</kind>
             <string>/// connect
-if (active == 3 &amp;&amp; cooldown &lt;= 0 ) {
+if (active == 2 &amp;&amp; cooldown &lt;= 0 ) {
     // Constuct the IP address
     var ip = n1 + "." + n2 + "." + n3 + "." + n4;
     

@@ -165,7 +165,7 @@ y+=vspd;        //advance vspd
             <string>///shoot
 var idle = 0;
 if (room == rm_lobby) &amp;&amp; (instance_exists(btn_joinGame)) &amp;&amp; ((btn_joinGame.active) || (btn_joinGame.cooldown&gt;0) || (btn_joinGame.guifade&gt;.1)){idle =1;}
-if (room == rm_lobby) &amp;&amp; (instance_exists(btn_createServer)) &amp;&amp; place_meeting(mouse_x,mouse_y,btn_createServer){idle = 1;}
+if (room == rm_lobby) &amp;&amp; (instance_exists(btn_createServer)) &amp;&amp; ((btn_createServer.active) || (btn_createServer.cooldown&gt;0) || (btn_createServer.guifade&gt;.1)){idle = 1;}
 gun_dir = point_direction(x+5*image_xscale,y-3,mouse_x,mouse_y);
 //shooting
 if mouse_check_button(mb_left) &amp;&amp; !idle{

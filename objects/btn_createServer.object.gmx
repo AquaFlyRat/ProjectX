@@ -25,9 +25,90 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited();
+            <string>///init
+event_inherited();
 text = "server"
 depth = -y;
+active = 0;
+cooldown = 0;
+nickname = "";
+nn_length = 15;
+guifade = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///stuff
+if (active){
+    var k = "";
+    k = letter_check();
+    nickname+=k;
+    //back
+    if keyboard_check_pressed(vk_backspace){
+        if string_length(nickname)&lt;=0{
+            active--;
+        }
+        nickname = string_copy(nickname,0,string_length(nickname)-1)
+    }
+    if string_length(nickname)&gt;=nn_length{
+        nickname = string_copy(nickname,0,nn_length)
+    }
+    if keyboard_check_released(vk_enter) &amp;&amp; cooldown&lt;=0{
+        ///add nickname to client
+    }
+}
+if active{
+    if keyboard_check_pressed(vk_escape){
+        cooldown = 5;
+        active = 0;
+    }
+}
+cooldown--;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="53">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///deactivate
+if active ==1 &amp;&amp; cooldown&lt;=0{
+    active = 0;
+    cooldown = 5;
+}
 </string>
           </argument>
         </arguments>
@@ -50,7 +131,81 @@ depth = -y;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>create_server();
+            <string>///activate
+if active ==0{
+    active = 1;
+    cooldown = 5;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw
+if(active){
+    if guifade&lt;1{guifade = lerp(guifade,1,.1)}
+    ///vars
+    var vw = view_wview*obj_view.view_zoom;
+    var vh = view_hview*obj_view.view_zoom
+    //name
+    var p1 = "please enter nickname and press [enter]";
+    var p2 = string(nickname)+"_----------------------";
+        p2 = string_copy(p2,0,nn_length)
+    var sc = 1;
+    ///background
+    draw_set_color(c_black);
+    draw_set_alpha(.5*guifade);
+    draw_rectangle(-8,-8,(vw)+8,(vh)+8,false);
+    ///prompt
+    text_draw(vw*.5-text_length(p1,spr_font_a,sc)*.5,vh*.4,p1,spr_font_a,c_white,sc,1*guifade,false);
+    text_draw(vw*.5-text_length(p2,spr_font_a,sc)*.5,vh*.5,p2,spr_font_a,c_white,sc,1*guifade,false);
+}else{
+    if guifade&gt;0{guifade = lerp(guifade,0,.1)}
+}
+draw_set_alpha(1);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="13">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (active){
+    create_server();
+    active = 0;
+}
 </string>
           </argument>
         </arguments>
