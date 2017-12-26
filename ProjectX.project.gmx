@@ -35,6 +35,7 @@
     <sprite>sprites\spr_testbullet</sprite>
     <sprite>sprites\spr_testammo</sprite>
     <sprite>sprites\spr_col</sprite>
+    <sprite>sprites\spr_ctrl</sprite>
     <sprite>sprites\spr_wind</sprite>
     <sprite>sprites\spr_view</sprite>
     <sprite>sprites\spr_display</sprite>
@@ -71,6 +72,10 @@
       </scripts>
     </scripts>
   </scripts>
+  <shaders name="shaders">
+    <shader type="GLSLES">shaders\shd_vanilla.shader</shader>
+    <shader type="GLSLES">shaders\shd_daynight.shader</shader>
+  </shaders>
   <objects name="objects">
     <objects name="mob">
       <object>objects\obj_bullet</object>
@@ -111,6 +116,7 @@
       <object>objects\obj_serverClient</object>
     </objects>
     <objects name="display">
+      <object>objects\obj_sh_control</object>
       <object>objects\obj_view</object>
       <object>objects\obj_display</object>
     </objects>
