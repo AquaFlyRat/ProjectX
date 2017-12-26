@@ -82,7 +82,6 @@
       <object>objects\obj_blood</object>
       <object>objects\obj_footprint</object>
       <object>objects\obj_player</object>
-      <object>objects\obj_netplayer</object>
     </objects>
     <objects name="env">
       <object>objects\obj_toxicbarrel</object>
@@ -111,9 +110,14 @@
       <object>objects\btn_joinGame</object>
     </objects>
     <objects name="net">
-      <object>objects\obj_server</object>
-      <object>objects\obj_client</object>
-      <object>objects\obj_serverClient</object>
+      <objects name="server">
+        <object>objects\obj_server</object>
+        <object>objects\obj_serverClient</object>
+      </objects>
+      <objects name="client">
+        <object>objects\obj_client</object>
+        <object>objects\obj_netplayer</object>
+      </objects>
     </objects>
     <objects name="display">
       <object>objects\obj_sh_control</object>
