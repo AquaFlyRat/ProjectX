@@ -139,6 +139,7 @@ if(next_x &gt; prev_x ) {
         <arguments>
           <argument>
             <kind>1</kind>
+<<<<<<< HEAD
             <string>///footprints
 if sprite_index == spr_hazmat_run{
     if image_index mod 2 = 0{
@@ -174,6 +175,32 @@ if hp&lt;=2 &amp;&amp; (abs(next_x-prev_x)&gt;0.5 || abs(next_y-prev_y)&gt;0.5){
     var r = 5;
     if r = irandom(r){
         instance_create(x+irandom_range(-6,6),y+irandom_range(-6,6),obj_blood);
+=======
+            <string>/// Damage
+
+if (instance_exists(obj_bullet)) {
+    if (place_meeting(x,y,obj_bullet)) {
+        var b = instance_place(x,y,obj_bullet);
+        if (b.par != id &amp;&amp; b.activ) {
+            repeat(3) {
+                instance_create(x + irandom_range(-6,6),y + irandom_range(-4,4),obj_blood);
+            }
+            with(b) {
+                image_index = 0;
+                instance_destroy();
+                activ = 0;
+            }
+        }
+    }
+}
+
+if (instance_exists(obj_explosion)){
+    if (place_meeting(x,y,obj_explosion)) {
+        // Blood
+        repeat(6) {
+            instance_create(x + irandom_range(-6,6),y + irandom_range(-4,4),obj_blood);
+        }
+>>>>>>> f8a6cb8ad4a86240e52b5e3a38c431ca2042fe77
     }
 }
 </string>
