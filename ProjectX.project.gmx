@@ -140,7 +140,7 @@
     <room>rooms\rm_lobby</room>
   </rooms>
   <constants number="10">
-	<constant name="netc_bullet_fired">3</constant>
+    <constant name="netc_bullet_fired">3</constant>
     <constant name="netc_move">1</constant>
     <constant name="netc_player_leave">2</constant>
     <constant name="netc_ammocreate">4</constant>
