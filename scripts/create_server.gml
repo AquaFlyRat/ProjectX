@@ -19,6 +19,30 @@ if(curr_client_id < 0) {
 while(true) {
     var msg_id = buffer_read(buffer, buffer_u8);
     switch(msg_id) {
+    case netc_bullet_fired:
+        var xx = buffer_read(buffer, buffer_u16);
+        var yy = buffer_read(buffer, buffer_u16);
+        var dir = buffer_read(buffer, buffer_u16);
+        var spd = buffer_read(buffer, buffer_u16);
+        var _id = buffer_read(buffer, buffer_u32);
+        
+        //create_server_bullet(dir, spd, curr_client_id, xx, yy);
+        
+        buffer_seek(send_buffer, buffer_seek_start, 0);
+        buffer_write(send_buffer, buffer_u8, netc_bullet_fired);
+        buffer_write(send_buffer, buffer_u16, xx);
+        buffer_write(send_buffer, buffer_u16, yy);
+        buffer_write(send_buffer, buffer_u16, dir);
+        buffer_write(send_buffer, buffer_u16, spd);
+        buffer_write(send_buffer, buffer_u32, _id);
+        
+        with(obj_serverClient) {
+            if(client_id != curr_client_id) {
+                network_send_raw(self.socket_id, other.send_buffer, 13);
+            }
+        }
+        
+        break;
     case netc_move:
         var xx = buffer_read(buffer, buffer_u16);
         var yy = buffer_read(buffer, buffer_u16);

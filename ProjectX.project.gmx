@@ -68,9 +68,11 @@
       <script>scripts\player_hosting_server.gml</script>
       <scripts name="server">
         <script>scripts\create_server.gml</script>
+        <script>scripts\create_server_bullet.gml</script>
       </scripts>
       <scripts name="client">
         <script>scripts\create_client.gml</script>
+        <script>scripts\client_fired_bullet_dispatch.gml</script>
       </scripts>
     </scripts>
   </scripts>
@@ -120,6 +122,7 @@
       <object>objects\obj_server</object>
       <object>objects\obj_client</object>
       <object>objects\obj_serverClient</object>
+      <object>objects\obj_serverBullet</object>
     </objects>
     <objects name="display">
       <object>objects\obj_sh_control</object>
@@ -131,14 +134,15 @@
     <room>rooms\rm_init</room>
     <room>rooms\rm_lobby</room>
   </rooms>
-  <constants number="7">
-    <constant name="update_spd">6</constant>
+  <constants number="8">
     <constant name="max_clients">5</constant>
-    <constant name="std_port">6510</constant>
-    <constant name="start_posx">128</constant>
-    <constant name="start_posy">160</constant>
+    <constant name="netc_bullet_fired">3</constant>
     <constant name="netc_move">1</constant>
     <constant name="netc_player_leave">2</constant>
+    <constant name="start_posx">128</constant>
+    <constant name="start_posy">160</constant>
+    <constant name="std_port">6510</constant>
+    <constant name="update_spd">6</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

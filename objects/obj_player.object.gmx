@@ -191,6 +191,11 @@ if (shoot) &amp;&amp; (alarm[0] = -1){
         b.dir = gun_dir;    //bullet direction
         b.spd = 5+hspd;     //bullet speed
         b.par = id;         //set self as identifiable parent
+        
+        with(obj_client) {
+            client_fired_bullet_dispatch(other.x + ofx, other.y + ofy, other.gun_dir, 5 + other.hspd, other.id);
+        }
+        
         //reset timer
         alarm[0] = weapon[gun,wp_speed];
     }else{

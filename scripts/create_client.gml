@@ -26,7 +26,19 @@ while(true) {
         }
         ds_map_delete(client_map, string(cid));
         break;
+    case netc_bullet_fired:
+        var xx = buffer_read(buffer, buffer_u16);
+        var yy = buffer_read(buffer, buffer_u16);
+        var dir = buffer_read(buffer, buffer_u16);
+        var spd = buffer_read(buffer, buffer_u16);
+        var _id = buffer_read(buffer, buffer_u32);
         
+        var bullet = instance_create(xx, yy, obj_bullet);
+        bullet.dir = dir;
+        bullet.spd = spd;
+        bullet.par = _id;
+        
+        break;
     case netc_move:
         var client_id_ = buffer_read(buffer, buffer_u16);
         var xx = buffer_read(buffer, buffer_u16);
