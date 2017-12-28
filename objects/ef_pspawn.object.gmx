@@ -84,7 +84,9 @@ if spawnat&lt;=0{
     instance_destroy();
 }
 depth = -y
-draw_sprite_ext(spr_spawnshadow,0,x,y,1,1,0,c_white,.5);
+var s = spawnat/10;
+s = clamp(s,1,20);
+draw_sprite_ext(spr_spawnshadow,0,x,y,1/s,1/s,0,c_white,.5);
 draw_sprite_ext(spr_pspawn,0,x,y-spawnat,1,1,0,c_white,1);
 instance_create(x,y-spawnat-10,obj_smoke);
 </string>

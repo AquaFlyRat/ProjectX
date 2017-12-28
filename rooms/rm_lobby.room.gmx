@@ -943,7 +943,7 @@
     <instance objName="obj_explosivebarrel" x="200" y="152" name="inst_CB0BBB24" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_explosivebarrel" x="200" y="120" name="inst_B1C89415" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_sh_control" x="16" y="16" name="inst_F155E946" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="ef_pspawn" x="160" y="160" name="inst_F0D631E2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_intro" x="16" y="32" name="inst_9E361348" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

@@ -25,6 +25,7 @@
     <sprite>sprites\spr_snowpart</sprite>
     <sprite>sprites\spr_grass</sprite>
     <sprite>sprites\spr_toxicbarrel</sprite>
+    <sprite>sprites\spr_toxicbarrel_dead</sprite>
     <sprite>sprites\spr_spawnshadow</sprite>
     <sprite>sprites\spr_pspawn</sprite>
     <sprite>sprites\spr_smoke</sprite>
@@ -90,8 +91,9 @@
     <objects name="env">
       <object>objects\obj_pspawn</object>
       <object>objects\obj_toxicbarrel</object>
-      <object>objects\obj_explosivebarrel_dead</object>
+      <object>objects\obj_toxicbarrel_dead</object>
       <object>objects\obj_explosivebarrel</object>
+      <object>objects\obj_explosivebarrel_dead</object>
       <object>objects\obj_smoke</object>
       <object>objects\obj_explosion</object>
       <object>objects\obj_toxic</object>
@@ -132,7 +134,6 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>
-    <room>rooms\rm_menu</room>
     <room>rooms\rm_lobby</room>
   </rooms>
   <constants number="7">
