@@ -28,7 +28,6 @@
             <string>///init
 randomize();
 surface = surface_create(room_width,room_height);
-global.shader = "day";
 //shader
     //1
 r1 = shader_get_uniform(shd_daynight, "r1");
@@ -110,6 +109,19 @@ if global.shader == "dusk"{
     shader_set_uniform_f(r2,0.45,0,0);
     shader_set_uniform_f(g2,0,0.48,0);
     shader_set_uniform_f(b2,0,0,0.35);
+    shader_set_uniform_f(o2,0,0,0);
+}
+//dawn shader
+if global.shader == "dawn"{
+        //set 1
+    shader_set_uniform_f(r1,1,0,0);
+    shader_set_uniform_f(g1,0,1,0);
+    shader_set_uniform_f(b1,0,0,1);
+    shader_set_uniform_f(o1,0,0,0);
+        //set 2
+    shader_set_uniform_f(r2,1,0,0);
+    shader_set_uniform_f(g2,0,0.76,0);
+    shader_set_uniform_f(b2,0,0,0.44);
     shader_set_uniform_f(o2,0,0,0);
 }
 //aurora shader

@@ -42,6 +42,7 @@ weapon[0,wp_speed] = 10;
 gun = 0;
 ammo = weapon[gun,wp_maxammo];
 hp = 10;
+dead = 0;
 //motion
 spdlerp = .1;
 frclerp = .2;
@@ -98,17 +99,22 @@ shoot = 0;
           <argument>
             <kind>1</kind>
             <string>///move
-var idle = 0;
-if (room == rm_lobby) &amp;&amp; (instance_exists(btn_joinGame)) &amp;&amp; (btn_joinGame.active){idle =1;}
-if !idle{
-    var ud = (keyboard_check(ord("S")) || keyboard_check(vk_down))-(keyboard_check(ord("W")) || keyboard_check(vk_up));
-    var lr = (keyboard_check(ord("D")) || keyboard_check(vk_right))-(keyboard_check(ord("A")) || keyboard_check(vk_left));
+if !dead{
+    var idle = 0;
+    if (room == rm_lobby) &amp;&amp; (instance_exists(btn_joinGame)) &amp;&amp; (btn_joinGame.active){idle =1;}
+    if !idle{
+        var ud = (keyboard_check(ord("S")) || keyboard_check(vk_down))-(keyboard_check(ord("W")) || keyboard_check(vk_up));
+        var lr = (keyboard_check(ord("D")) || keyboard_check(vk_right))-(keyboard_check(ord("A")) || keyboard_check(vk_left));
+    }else{
+        ud = 0;
+        lr = 0;
+    }
+    var hsp = lr*spdmax;
+    var vsp = ud*spdmax;
 }else{
-    ud = 0;
-    lr = 0;
+    hsp = 0;
+    vsp = 0;
 }
-var hsp = lr*spdmax;
-var vsp = ud*spdmax;
 //hspeed
 if abs(hsp) != 0{
     //if moving, speed buildup
@@ -168,7 +174,7 @@ if (room == rm_lobby) &amp;&amp; (instance_exists(btn_joinGame)) &amp;&amp; ((bt
 if (room == rm_lobby) &amp;&amp; (instance_exists(btn_createServer)) &amp;&amp; ((btn_createServer.active) || (btn_createServer.cooldown&gt;0) || (btn_createServer.guifade&gt;.1)){idle = 1;}
 gun_dir = point_direction(x+5*image_xscale,y-3,mouse_x,mouse_y);
 //shooting
-if mouse_check_button(mb_left) &amp;&amp; !idle{
+if mouse_check_button(mb_left) &amp;&amp; !idle &amp;&amp; !dead{
     shoot = 1;
 }
 //shoot timer
@@ -189,6 +195,35 @@ if (shoot) &amp;&amp; (alarm[0] = -1){
         alarm[0] = weapon[gun,wp_speed];
     }else{
         shoot = 0;
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///ammo
+if place_meeting(x,y,obj_ammo) &amp;&amp; !dead{
+    if ammo&lt;weapon[gun,wp_maxammo]{
+        with(instance_nearest(x,y,obj_ammo)){
+            instance_destroy();
+        }
+        ammo+=5;
     }
 }
 </string>
@@ -290,14 +325,20 @@ if hp&lt;=1 &amp;&amp; (abs(hspd)&gt;0.5 || abs(vspd)&gt;0.5){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///ammo
-if place_meeting(x,y,obj_ammo){
-    if ammo&lt;weapon[gun,wp_maxammo]{
-        with(instance_nearest(x,y,obj_ammo)){
-            instance_destroy();
-        }
-        ammo+=5;
-    }
+            <string>///hp and death
+if room== rm_lobby{
+    hp = clamp(hp,0,100);
+}else{
+    hp = clamp(hp,0,100);
+}
+//dead
+if hp&lt;=0 &amp;&amp; !dead{
+    dead = 1;
+}
+//drops
+if dead &amp;&amp; ammo&gt;0{
+    ammo-=5;
+    instance_create(x+irandom_range(-6,6),y+irandom_range(-6,6),obj_ammo);
 }
 </string>
           </argument>
@@ -320,14 +361,18 @@ if place_meeting(x,y,obj_ammo){
           <argument>
             <kind>1</kind>
             <string>///animate
-if distance(x,y,xprevious,yprevious)&gt;.5{
-    if sprite_index !=spr_hazmat_run{
-        sprite_index = spr_hazmat_run;
-        image_index = 1;
+if !dead{
+    if distance(x,y,xprevious,yprevious)&gt;.5{
+        if sprite_index !=spr_hazmat_run{
+            sprite_index = spr_hazmat_run;
+            image_index = 1;
+        }
+        image_speed = .25;
+    }else{
+        sprite_index = spr_hazmat_idle;
     }
-    image_speed = .25;
 }else{
-    sprite_index = spr_hazmat_idle;
+    sprite_index = spr_hazmat_dead;
 }
 </string>
           </argument>
@@ -382,12 +427,14 @@ if sprite_index == spr_hazmat_run{
           <argument>
             <kind>1</kind>
             <string>///draw self
-//draw gun
-var ofx = 7*image_xscale;
-var ofy = -3;
-var inc_dir = 0; 
-if image_xscale&lt;0{inc_dir = 180}
-draw_sprite_ext(weapon[gun,wp_weapontype],0,x+ofx,y+ofy,image_xscale,image_yscale,gun_dir+inc_dir,c_white,image_alpha);
+if hp&gt;0{
+    //draw gun
+    var ofx = 7*image_xscale;
+    var ofy = -3;
+    var inc_dir = 0; 
+    if image_xscale&lt;0{inc_dir = 180}
+    draw_sprite_ext(weapon[gun,wp_weapontype],0,x+ofx,y+ofy,image_xscale,image_yscale,gun_dir+inc_dir,c_white,image_alpha);
+}
 //self
 draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,c_white,image_alpha);
 //aim

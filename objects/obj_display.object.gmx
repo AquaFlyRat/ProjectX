@@ -59,6 +59,7 @@ alarm[0] = 1;
 y = floor(y);
 image_alpha = 0;
 global.opt = 0;
+global.shader = "day";
 </string>
           </argument>
         </arguments>
