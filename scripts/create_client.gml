@@ -58,12 +58,41 @@ while(true) {
         }
         
         break;
+    
+    case netc_ammodestroy:
+        var ammoid = buffer_read(buffer, buffer_u16);
+         
+        for (i=0; i<=instance_number(obj_ammo); i++) {
+            var ammo = instance_find(obj_ammo, i);
+            if(instance_exists(ammo)) {
+                var amid = ammo.ammo_id;
+                if(amid == ammoid) {
+                    with (ammo) {
+                        instance_destroy();
+                    }
+                }
+            }
+        }
+        
+        break;
     }
     
     if(buffer_tell(buffer) == buffer_get_size(buffer)) {
         break;
     }
+    
+    
 }
+
+
+
+
+
+
+
+
+
+
 
 #define client_send_move_data
 buffer_seek(send_buffer, buffer_seek_start, 0);

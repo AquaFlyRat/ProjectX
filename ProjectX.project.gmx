@@ -25,6 +25,7 @@
     <sprite>sprites\spr_snowpart</sprite>
     <sprite>sprites\spr_grass</sprite>
     <sprite>sprites\spr_toxicbarrel</sprite>
+    <sprite>sprites\spr_toxicbarrel_dead</sprite>
     <sprite>sprites\spr_spawnshadow</sprite>
     <sprite>sprites\spr_pspawn</sprite>
     <sprite>sprites\spr_smoke</sprite>
@@ -86,14 +87,16 @@
       <object>objects\obj_bullet</object>
       <object>objects\obj_blood</object>
       <object>objects\obj_footprint</object>
-      <object>objects\obj_pspawn</object>
       <object>objects\ef_pspawn</object>
       <object>objects\obj_player</object>
     </objects>
     <objects name="env">
+      <object>objects\obj_ammo</object>
+      <object>objects\obj_pspawn</object>
       <object>objects\obj_toxicbarrel</object>
-      <object>objects\obj_explosivebarrel_dead</object>
+      <object>objects\obj_toxicbarrel_dead</object>
       <object>objects\obj_explosivebarrel</object>
+      <object>objects\obj_explosivebarrel_dead</object>
       <object>objects\obj_smoke</object>
       <object>objects\obj_explosion</object>
       <object>objects\obj_toxic</object>
@@ -102,7 +105,6 @@
       <object>objects\obj_snowpart</object>
       <object>objects\obj_tree</object>
       <object>objects\obj_grass</object>
-      <object>objects\obj_ammo</object>
       <object>objects\obj_puddle</object>
       <object>objects\obj_path</object>
       <object>objects\obj_floor</object>
@@ -129,11 +131,15 @@
       <object>objects\obj_view</object>
       <object>objects\obj_display</object>
     </objects>
+    <objects name="menu">
+      <object>objects\obj_intro</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>
     <room>rooms\rm_lobby</room>
   </rooms>
+<<<<<<< HEAD
   <constants number="8">
     <constant name="max_clients">5</constant>
     <constant name="netc_bullet_fired">3</constant>
@@ -143,6 +149,18 @@
     <constant name="start_posy">160</constant>
     <constant name="std_port">6510</constant>
     <constant name="update_spd">6</constant>
+=======
+  <constants number="9">
+    <constant name="netc_move">1</constant>
+    <constant name="netc_player_leave">2</constant>
+    <constant name="netc_ammocreate">4</constant>
+    <constant name="netc_ammodestroy">5</constant>
+    <constant name="update_spd">6</constant>
+    <constant name="max_clients">5</constant>
+    <constant name="start_posx">128</constant>
+    <constant name="start_posy">160</constant>
+    <constant name="std_port">6510</constant>
+>>>>>>> ccd45c3b49229ae6e39ed4137e0e31ac40ebffae
   </constants>
   <help>
     <rtf>help.rtf</rtf>
