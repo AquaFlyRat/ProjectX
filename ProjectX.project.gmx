@@ -87,12 +87,13 @@
       <object>objects\obj_bullet</object>
       <object>objects\obj_blood</object>
       <object>objects\obj_footprint</object>
-      <object>objects\ef_pspawn</object>
       <object>objects\obj_player</object>
     </objects>
     <objects name="env">
       <object>objects\obj_ammo</object>
       <object>objects\obj_pspawn</object>
+      <object>objects\ef_pspawn</object>
+      <object>objects\ef_psleave</object>
       <object>objects\obj_toxicbarrel</object>
       <object>objects\obj_toxicbarrel_dead</object>
       <object>objects\obj_explosivebarrel</object>
@@ -140,7 +141,7 @@
     <room>rooms\rm_lobby</room>
   </rooms>
   <constants number="10">
-	<constant name="netc_bullet_fired">3</constant>
+    <constant name="netc_bullet_fired">3</constant>
     <constant name="netc_move">1</constant>
     <constant name="netc_player_leave">2</constant>
     <constant name="netc_ammocreate">4</constant>
