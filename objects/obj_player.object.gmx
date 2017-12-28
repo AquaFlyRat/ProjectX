@@ -327,7 +327,7 @@ if hp&lt;=1 &amp;&amp; (abs(hspd)&gt;0.5 || abs(vspd)&gt;0.5){
             <kind>1</kind>
             <string>///hp and death
 if room== rm_lobby{
-    hp = clamp(hp,0,100);
+    hp = clamp(hp,1,100);
 }else{
     hp = clamp(hp,0,100);
 }
