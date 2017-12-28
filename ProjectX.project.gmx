@@ -86,7 +86,6 @@
       <object>objects\obj_footprint</object>
       <object>objects\ef_pspawn</object>
       <object>objects\obj_player</object>
-      <object>objects\obj_netplayer</object>
     </objects>
     <objects name="env">
       <object>objects\obj_pspawn</object>
@@ -116,6 +115,7 @@
       <object>objects\btn_joinGame</object>
     </objects>
     <objects name="net">
+      <object>objects\obj_netplayer</object>
       <object>objects\obj_match_control</object>
       <object>objects\obj_server</object>
       <object>objects\obj_client</object>
