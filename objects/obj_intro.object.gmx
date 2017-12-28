@@ -27,8 +27,8 @@
             <kind>1</kind>
             <string>///init_text
 line1 = "game created by"
-line2 = "bwalter"
-line3 = "barney wilks"
+line2 = "barney wilks"
+line3 = "bwalter"
 line4 = "holy black cat"
 fade = 0;
 fspeed = .1;

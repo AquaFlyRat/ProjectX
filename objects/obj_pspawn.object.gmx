@@ -32,6 +32,7 @@ image_index = 1;
 if instance_nearest(x,y,obj_pspawn) !=id{
     instance_destroy();
 }
+obj_view.shake+=5;
 </string>
           </argument>
         </arguments>
