@@ -26,8 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>///init
+randomize();
 surface = surface_create(room_width,room_height);
-global.shader = "day"
 //shader
     //1
 r1 = shader_get_uniform(shd_daynight, "r1");
@@ -39,6 +39,11 @@ r2 = shader_get_uniform(shd_daynight, "r2");
 g2 = shader_get_uniform(shd_daynight, "g2");
 b2 = shader_get_uniform(shd_daynight, "b2");
 o2 = shader_get_uniform(shd_daynight, "o2");
+    //extra vars
+//u_res = shader_get_uniform(shd_daynight, "u_res");
+//vars
+time = 0;
+arr[3,3] = -1;
 </string>
           </argument>
         </arguments>
@@ -65,6 +70,7 @@ o2 = shader_get_uniform(shd_daynight, "o2");
 shader_reset();
 var mdist = 192;
 var shader = shd_daynight;
+if global.shader =="whiteout"{shader = shd_whiteout}
 shader_set(shader);
 //day shader
 if global.shader == "day"{
@@ -91,6 +97,53 @@ if global.shader == "night"{
     shader_set_uniform_f(g2,0,0.11,0);
     shader_set_uniform_f(b2,0,0,0.12);
     shader_set_uniform_f(o2,0,0,0);
+}
+//dusk shader
+if global.shader == "dusk"{
+        //set 1
+    shader_set_uniform_f(r1,0.9,0,0);
+    shader_set_uniform_f(g1,0,0.99,0);
+    shader_set_uniform_f(b1,0,0,0.92);
+    shader_set_uniform_f(o1,0,0,0);
+        //set 2
+    shader_set_uniform_f(r2,0.45,0,0);
+    shader_set_uniform_f(g2,0,0.48,0);
+    shader_set_uniform_f(b2,0,0,0.35);
+    shader_set_uniform_f(o2,0,0,0);
+}
+//dawn shader
+if global.shader == "dawn"{
+        //set 1
+    shader_set_uniform_f(r1,1,0,0);
+    shader_set_uniform_f(g1,0,1,0);
+    shader_set_uniform_f(b1,0,0,1);
+    shader_set_uniform_f(o1,0,0,0);
+        //set 2
+    shader_set_uniform_f(r2,1,0,0);
+    shader_set_uniform_f(g2,0,0.76,0);
+    shader_set_uniform_f(b2,0,0,0.44);
+    shader_set_uniform_f(o2,0,0,0);
+}
+//aurora shader
+if global.shader =="aurora"{
+    time++;
+    var angle = time / 60.; // or something
+    var c = cos(angle);
+    var s = sin(angle);
+    var a = 1/sqrt(3), a2 = a * a, f = 0.;
+    //fix values
+    arr[0,0] = a2 * (1 - c) + c      ;  arr[0,1] = a2 * (1 - c) - a * s  ;  arr[0,2] = a2 * (1 - c) + a * s;
+    arr[1,0] = a2 * (1 - c) + a * s  ;  arr[1,1] = a2 * (1 - c) + c      ;  arr[1,2] = a2 * (1 - c) - a * s;
+    arr[2,0] = a2 * (1 - c) - a * s  ;  arr[2,1] = a2 * (1 - c) + a * s  ;  arr[2,2] = a2 * (1 - c) + c;
+    // Now the numbers:
+    shader_set_uniform_f(r1,    arr[0,0]*f+1-f       ,  arr[0,1]*f           ,  arr[0,2]*f)
+    shader_set_uniform_f(g1,    arr[1,0]*f           ,  arr[1,1]*f+1-f       ,  arr[1,2]*f)
+    shader_set_uniform_f(b1,    arr[2,0]*f           ,  arr[2,1]*f           ,  arr[2,2]*f+1-f)
+    shader_set_uniform_f(o1,    0                     ,  0                     ,  0)
+    shader_set_uniform_f(r2,    arr[0,0]             ,  arr[0,1]             ,  arr[0,2]) 
+    shader_set_uniform_f(g2,    arr[1,0]             ,  arr[1,1]             ,  arr[1,2])
+    shader_set_uniform_f(b2,    arr[2,0]             ,  arr[2,1]             ,  arr[2,2])         
+    shader_set_uniform_f(o2,    0                     ,  0                     ,  0)
 }
 </string>
           </argument>

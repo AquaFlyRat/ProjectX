@@ -25,6 +25,8 @@
     <sprite>sprites\spr_snowpart</sprite>
     <sprite>sprites\spr_grass</sprite>
     <sprite>sprites\spr_toxicbarrel</sprite>
+    <sprite>sprites\spr_spawnshadow</sprite>
+    <sprite>sprites\spr_pspawn</sprite>
     <sprite>sprites\spr_smoke</sprite>
     <sprite>sprites\spr_explosion</sprite>
     <sprite>sprites\spr_explosivebarrel</sprite>
@@ -75,12 +77,15 @@
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shd_vanilla.shader</shader>
     <shader type="GLSLES">shaders\shd_daynight.shader</shader>
+    <shader type="GLSLES">shaders\shd_whiteout.shader</shader>
   </shaders>
   <objects name="objects">
     <objects name="mob">
       <object>objects\obj_bullet</object>
       <object>objects\obj_blood</object>
       <object>objects\obj_footprint</object>
+      <object>objects\obj_pspawn</object>
+      <object>objects\ef_pspawn</object>
       <object>objects\obj_player</object>
     </objects>
     <objects name="env">
@@ -110,14 +115,11 @@
       <object>objects\btn_joinGame</object>
     </objects>
     <objects name="net">
-      <objects name="server">
-        <object>objects\obj_server</object>
-        <object>objects\obj_serverClient</object>
-      </objects>
-      <objects name="client">
-        <object>objects\obj_client</object>
-        <object>objects\obj_netplayer</object>
-      </objects>
+      <object>objects\obj_netplayer</object>
+      <object>objects\obj_match_control</object>
+      <object>objects\obj_server</object>
+      <object>objects\obj_client</object>
+      <object>objects\obj_serverClient</object>
     </objects>
     <objects name="display">
       <object>objects\obj_sh_control</object>
