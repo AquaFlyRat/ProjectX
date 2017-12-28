@@ -84,12 +84,12 @@
       <object>objects\obj_bullet</object>
       <object>objects\obj_blood</object>
       <object>objects\obj_footprint</object>
-      <object>objects\obj_pspawn</object>
       <object>objects\ef_pspawn</object>
       <object>objects\obj_player</object>
       <object>objects\obj_netplayer</object>
     </objects>
     <objects name="env">
+      <object>objects\obj_pspawn</object>
       <object>objects\obj_toxicbarrel</object>
       <object>objects\obj_explosivebarrel_dead</object>
       <object>objects\obj_explosivebarrel</object>
@@ -126,9 +126,13 @@
       <object>objects\obj_view</object>
       <object>objects\obj_display</object>
     </objects>
+    <objects name="menu">
+      <object>objects\obj_intro</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>
+    <room>rooms\rm_menu</room>
     <room>rooms\rm_lobby</room>
   </rooms>
   <constants number="7">
