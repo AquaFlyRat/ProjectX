@@ -25,9 +25,12 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>dir = 0;
+            <string>// Test push
+
+dir = 0;
 spd = 0;
 parent_client_id = -1;
+
 </string>
           </argument>
         </arguments>
