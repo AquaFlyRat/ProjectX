@@ -69,6 +69,7 @@ while(true) {
         } else {
             var c = instance_create(xx, yy, obj_netplayer);
             client_map[? string(client_id_)] = c;
+            c.client_id = client_id_;
         }
         
         break;

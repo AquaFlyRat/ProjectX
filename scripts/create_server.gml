@@ -34,7 +34,7 @@ while(true) {
         buffer_write(send_buffer, buffer_u16, yy);
         buffer_write(send_buffer, buffer_u16, dir);
         buffer_write(send_buffer, buffer_u16, spd);
-        buffer_write(send_buffer, buffer_u32, _id);
+        buffer_write(send_buffer, buffer_u32, curr_client_id);
         
         with(obj_serverClient) {
             if(client_id != curr_client_id) {
