@@ -43,13 +43,50 @@ while(true) {
         }
         
         break;
+    case netc_puddle:
+        var xx = buffer_read(buffer, buffer_u16);
+        var yy = buffer_read(buffer, buffer_u16);
+        var obj = buffer_read(buffer, buffer_u32);
+        
+        buffer_seek(send_buffer, buffer_seek_start, 0);
+        buffer_write(send_buffer, buffer_u8, netc_puddle);
+        buffer_write(send_buffer, buffer_u16, xx);
+        buffer_write(send_buffer, buffer_u16, yy);
+        buffer_write(send_buffer, buffer_u32, obj);
+        
+        with(obj_serverClient) {
+            if(client_id != curr_client_id) {
+                network_send_raw(self.socket_id, other.send_buffer, 9);
+            }
+        }
+        
+        break;
+    case netc_ammocreate:
+        var xx = buffer_read(buffer, buffer_u16);
+        var yy = buffer_read(buffer, buffer_u16);
+        
+        buffer_seek(send_buffer, buffer_seek_start, 0);
+        buffer_write(send_buffer, buffer_u8, netc_ammocreate);
+        buffer_write(send_buffer, buffer_u16, xx);
+        buffer_write(send_buffer, buffer_u16, yy);
+        
+        with(obj_serverClient) {
+            if(client_id != curr_client_id) {
+                network_send_raw(self.socket_id, other.send_buffer, 5);
+            }
+        }
+        
+        break;
     case netc_move:
         var xx = buffer_read(buffer, buffer_u16);
         var yy = buffer_read(buffer, buffer_u16);
+        var xscale = buffer_read(buffer, buffer_s8);
+        var hps = buffer_read(buffer, buffer_s16);
         
         with(client_map[? string(sock_id)]) {
             x = xx;
             y = yy;
+            image_xscale = xscale;
         }
         
         buffer_seek(send_buffer, buffer_seek_start, 0);
@@ -57,10 +94,12 @@ while(true) {
         buffer_write(send_buffer, buffer_u16, curr_client_id);
         buffer_write(send_buffer, buffer_u16, xx);
         buffer_write(send_buffer, buffer_u16, yy);
+        buffer_write(send_buffer, buffer_s8, xscale);
+        buffer_write(send_buffer, buffer_s16, hps);
         
         with(obj_serverClient) {
             if(client_id != curr_client_id) {
-                network_send_raw(self.socket_id, other.send_buffer, 7);
+                network_send_raw(self.socket_id, other.send_buffer, 10);
             }
         }
         

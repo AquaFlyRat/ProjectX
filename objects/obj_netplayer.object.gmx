@@ -58,14 +58,18 @@ ftat = 1;
           <argument>
             <kind>1</kind>
             <string>/// Animate
-if(distance(next_x, next_y, prev_x, prev_y) &gt; 0.5){
-    if(sprite_index != spr_hazmat_run) {
-        sprite_index = spr_hazmat_run;
-        image_index = 1;
+if hp&gt;0{
+    if(distance(next_x, next_y, prev_x, prev_y) &gt; 0.5){
+        if(sprite_index != spr_hazmat_run) {
+            sprite_index = spr_hazmat_run;
+            image_index = 1;
+        }
+        image_speed = .25;
+    } else {
+        sprite_index = spr_hazmat_idle;
     }
-    image_speed = .25;
-} else {
-    sprite_index = spr_hazmat_idle;
+}else{
+    sprite_index = spr_hazmat_dead;
 }
 </string>
           </argument>
@@ -113,7 +117,8 @@ time++;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Direction controller
+            <string>/// Direction controller (obsolete)
+/*
 if(next_x &gt; prev_x ) {
     image_xscale = 1;
 } else if(next_x &lt; prev_x) {
@@ -147,84 +152,6 @@ if sprite_index == spr_hazmat_run{
         var ft = instance_create(x+xx,y,obj_footprint);
         ft.image_angle = dir;
         ftat = -ftat;
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///bleed out
-if hp&lt;=2 &amp;&amp; (abs(next_x-prev_x)&gt;0.5 || abs(next_x-prev_x)&gt;0.5){
-    var r = 5;
-    if r = irandom(r){
-        instance_create(x+irandom_range(-6,6),y+irandom_range(-6,6),obj_blood);
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///damage
-/*
-if instance_exists(obj_bullet){
-    if place_meeting(x,y,obj_bullet){
-        var b = instance_place(x,y,obj_bullet);
-        if b.par != id &amp;&amp; b.activ{
-            hp--;
-            obj_view.shake+=2;
-            repeat(3){
-                instance_create(x+irandom_range(-6,6),y+irandom_range(-4,4),obj_blood);
-            }
-            with(b){
-                image_index = 0;
-                instance_destroy();
-                activ = 0;
-            }
-        }
-    }
-}
-*/
-if instance_exists(obj_explosion){
-    if place_meeting(x,y,obj_explosion){
-        var e = instance_place(x,y,obj_explosion);
-        //die
-        hp-=10;
-        ///blood
-        repeat(6){
-            instance_create(x+irandom_range(-6,6),y+irandom_range(-4,4),obj_blood);
-        }
     }
 }
 </string>

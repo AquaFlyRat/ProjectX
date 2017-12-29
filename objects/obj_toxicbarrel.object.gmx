@@ -87,7 +87,12 @@ if instance_exists(obj_bullet){
         var b = instance_place(x,y,obj_bullet);
         hp--;
         repeat(3){
-            instance_create(x+irandom_range(-6,6),y+irandom_range(-4,4),obj_toxic);
+            var xx = x+irandom_range(-6,6);
+            var yy = y+irandom_range(-4,4);
+            instance_create(xx,yy,obj_toxic);
+            with(obj_client){
+                client_add_puddle(xx,yy,obj_toxic);
+            }
         }
         with(b){
             image_index = 0;

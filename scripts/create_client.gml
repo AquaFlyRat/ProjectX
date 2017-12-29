@@ -26,6 +26,7 @@ while(true) {
         }
         ds_map_delete(client_map, string(cid));
         break;
+        
     case netc_bullet_fired:
         var xx = buffer_read(buffer, buffer_u16);
         var yy = buffer_read(buffer, buffer_u16);
@@ -39,10 +40,20 @@ while(true) {
         bullet.par = _id;
         
         break;
+    case netc_puddle:
+        var xx = buffer_read(buffer, buffer_u16);
+        var yy = buffer_read(buffer, buffer_u16);
+        var obj = buffer_read(buffer, buffer_u32);
+        
+        var puddle = instance_create(xx, yy, obj);
+        
+        break;   
     case netc_move:
         var client_id_ = buffer_read(buffer, buffer_u16);
         var xx = buffer_read(buffer, buffer_u16);
         var yy = buffer_read(buffer, buffer_u16);
+        var xscale = buffer_read(buffer, buffer_s8);
+        var hps = buffer_read(buffer, buffer_s16);
         
         if(ds_map_exists(client_map, string(client_id_))) {
             var found_client = client_map[? string(client_id_)];
@@ -52,13 +63,22 @@ while(true) {
             found_client.prev_x = found_client.x;
             found_client.prev_y = found_client.y;
             found_client.time = 0;
+            found_client.image_xscale = xscale;
+            found_client.hp = hps;
+            
         } else {
             var c = instance_create(xx, yy, obj_netplayer);
             client_map[? string(client_id_)] = c;
         }
         
         break;
-    
+    case netc_ammocreate:
+        var xx = buffer_read(buffer, buffer_u16);
+        var yy = buffer_read(buffer, buffer_u16);
+        
+        var obj = instance_create(xx, yy, obj_ammo);
+        
+        break; 
     case netc_ammodestroy:
         var ammoid = buffer_read(buffer, buffer_u16);
          
@@ -84,20 +104,12 @@ while(true) {
     
 }
 
-
-
-
-
-
-
-
-
-
-
 #define client_send_move_data
 buffer_seek(send_buffer, buffer_seek_start, 0);
 buffer_write(send_buffer, buffer_u8, netc_move);
 buffer_write(send_buffer, buffer_u16, round(obj_player.x));
 buffer_write(send_buffer, buffer_u16, round(obj_player.y));
+buffer_write(send_buffer, buffer_s8, round(obj_player.image_xscale));
+buffer_write(send_buffer, buffer_s16, round(obj_player.hp));
 
 network_send_raw(socket_id, send_buffer, buffer_tell(send_buffer));

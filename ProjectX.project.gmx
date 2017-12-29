@@ -140,12 +140,14 @@
     <room>rooms\rm_init</room>
     <room>rooms\rm_lobby</room>
   </rooms>
-  <constants number="10">
+  <constants number="12">
     <constant name="netc_bullet_fired">3</constant>
     <constant name="netc_move">1</constant>
     <constant name="netc_player_leave">2</constant>
     <constant name="netc_ammocreate">4</constant>
     <constant name="netc_ammodestroy">5</constant>
+    <constant name="netc_puddle">6</constant>
+    <constant name="netc_ammo">7</constant>
     <constant name="update_spd">6</constant>
     <constant name="max_clients">5</constant>
     <constant name="start_posx">128</constant>

@@ -187,9 +187,9 @@ if (shoot) &amp;&amp; (alarm[0] = -1){
         var ofy = -3;
         ofx+=lengthdir_x(8,gun_dir);        //find gun position
         ofy+=lengthdir_y(8,gun_dir);        //find gun position
-        var b = instance_create(x+ofx,y+ofy,weapon[gun,wp_ammotype]);
-        b.dir = gun_dir;    //bullet direction
-        b.spd = 5+hspd;     //bullet speed
+        var b = instance_create(round(x+ofx),round(y+ofy),weapon[gun,wp_ammotype]);
+        b.dir = round(gun_dir);     //bullet direction
+        b.spd = round(5+hspd);     //bullet speed
         b.par = id;         //set self as identifiable parent
         
         with(obj_client) {
@@ -259,7 +259,12 @@ if instance_exists(obj_bullet){
             hp--;
             obj_view.shake+=5;
             repeat(3){
-                instance_create(x+irandom_range(-6,6),y+irandom_range(-4,4),obj_blood);
+                var xx = x+irandom_range(-6,6);
+                var yy = y+irandom_range(-6,6);
+                instance_create(xx,yy,obj_blood);
+                with(obj_client){
+                    client_add_puddle(xx,yy,obj_blood);
+                }
             }
             with(b){
                 image_index = 0;
@@ -279,7 +284,12 @@ if instance_exists(obj_explosion){
         vspd = sign(y-e.y)*irandom_range(4,7);
         ///blood
         repeat(6){
-            instance_create(x+irandom_range(-6,6),y+irandom_range(-4,4),obj_blood);
+            var xx = x+irandom_range(-6,6);
+            var yy = y+irandom_range(-6,6);
+            instance_create(xx,yy,obj_blood);
+            with(obj_client){
+                client_add_puddle(xx,yy,obj_blood);
+            }
         }
     }
 }
@@ -307,7 +317,12 @@ if instance_exists(obj_explosion){
 if hp&lt;=2 &amp;&amp; (abs(hspd)&gt;0.5 || abs(vspd)&gt;0.5){
     var r = 5;
     if r = irandom(r){
-        instance_create(x+irandom_range(-6,6),y+irandom_range(-6,6),obj_blood);
+        var xx = x+irandom_range(-6,6);
+        var yy = y+irandom_range(-6,6);
+        instance_create(xx,yy,obj_blood);
+        with(obj_client){
+            client_add_puddle(xx,yy,obj_blood);
+        }
     }
 }
 </string>
@@ -331,7 +346,7 @@ if hp&lt;=2 &amp;&amp; (abs(hspd)&gt;0.5 || abs(vspd)&gt;0.5){
           <argument>
             <kind>1</kind>
             <string>///hp and death
-if room== rm_lobby{
+if room == rm_lobby{
     hp = clamp(hp,1,100);
 }else{
     hp = clamp(hp,0,100);
@@ -343,7 +358,12 @@ if hp&lt;=0 &amp;&amp; !dead{
 //drops
 if dead &amp;&amp; ammo&gt;0{
     ammo-=5;
-    instance_create(x+irandom_range(-6,6),y+irandom_range(-6,6),obj_ammo);
+    var xx = x+irandom_range(-6,6);
+    var yy = y+irandom_range(-6,6);
+    instance_create(xx,yy,obj_ammo);
+    with (obj_client) {
+        client_create_ammo(xx, yy);
+    }
 }
 </string>
           </argument>
