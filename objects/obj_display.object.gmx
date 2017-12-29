@@ -83,6 +83,9 @@ global.shader = "day";
             <string>///seperate vars
 global.ammonum = 0;
 global.ammocheck = 0;
+
+global.bulletnum = 0;
+global.bulletcheck = 0;
 </string>
           </argument>
         </arguments>

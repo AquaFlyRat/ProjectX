@@ -193,7 +193,7 @@ if (shoot) &amp;&amp; (alarm[0] = -1){
         b.par = id;         //set self as identifiable parent
         
         with(obj_client) {
-            client_fired_bullet_dispatch(other.x + ofx, other.y + ofy, other.gun_dir, 5 + other.hspd, other.id);
+            client_fired_bullet_dispatch(other.x + ofx, other.y + ofy, other.gun_dir, 5 + other.hspd, 0); //need new id system
         }
         
         //reset timer

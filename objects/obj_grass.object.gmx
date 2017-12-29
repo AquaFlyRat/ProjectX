@@ -63,9 +63,16 @@ image_xscale = choose(-1,1);
 var tex = sprite_get_texture(sprite_index,floor(image_index));
 draw_primitive_begin_texture(pr_trianglelist,tex);
 var sw = cos(swayat)*swayscale;
-if instance_exists(obj_player){
-    var dist = distance(x,y,obj_player.x,obj_player.y);
-    var nx = sign(x-obj_player.x);
+if instance_exists(obj_player) || instance_exists(obj_netplayer){
+    if instance_exists(obj_netplayer){var da = distance(x,y,obj_netplayer.x,obj_netplayer.y);}else{da = 9000}
+    if instance_exists(obj_player){var db = distance(x,y,obj_player.x,obj_player.y);}else{db = 9000}
+    var dist = min(da,db);
+    if dist ==da{
+        var nx = sign(x-obj_netplayer.x);
+    }
+    if dist ==db{
+        var nx = sign(x-obj_player.x);
+    }
 }else{
     var dist = 20;
     nx = 1;
