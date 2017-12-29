@@ -96,6 +96,37 @@ while(true) {
         }
         
         break;
+    case netc_barreldestroy:
+        var barrelid = buffer_read(buffer, buffer_u16);
+        var d = 0;
+        for (i=0; i<=instance_number(obj_toxicbarrel); i++) {
+            var barrel = instance_find(obj_toxicbarrel, i);
+            if(instance_exists(barrel)) {
+                var brid = barrel.barrel_id;
+                if(brid == barrelid) {
+                    with (barrel) {
+                        tell = 0;
+                        instance_destroy();
+                    }
+                    d = 1;
+                }
+            }
+        }
+        if d == 0{
+            for (i=0; i<=instance_number(obj_explosivebarrel); i++) {
+                var barrel = instance_find(obj_explosivebarrel, i);
+                if(instance_exists(barrel)) {
+                    var brid = barrel.barrel_id;
+                    if(brid == barrelid) {
+                        with (barrel) {
+                            tell = 0;
+                            instance_destroy();
+                        }
+                    }
+                }
+            }
+        }
+        break;
     }
     
     if(buffer_tell(buffer) == buffer_get_size(buffer)) {

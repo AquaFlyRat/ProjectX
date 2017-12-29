@@ -120,6 +120,7 @@
       <object>objects\btn_joinGame</object>
     </objects>
     <objects name="net">
+      <object>objects\obj_synccontrol</object>
       <object>objects\obj_netplayer</object>
       <object>objects\obj_match_control</object>
       <object>objects\obj_server</object>
@@ -147,7 +148,7 @@
     <constant name="netc_ammocreate">4</constant>
     <constant name="netc_ammodestroy">5</constant>
     <constant name="netc_puddle">6</constant>
-    <constant name="netc_ammo">7</constant>
+    <constant name="netc_barreldestroy">7</constant>
     <constant name="update_spd">6</constant>
     <constant name="max_clients">5</constant>
     <constant name="start_posx">128</constant>

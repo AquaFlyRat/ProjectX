@@ -29,7 +29,6 @@
 depth = -y;
 ammo_id = global.ammonum;
 global.ammonum++;
-gui = 0;
 </string>
           </argument>
         </arguments>

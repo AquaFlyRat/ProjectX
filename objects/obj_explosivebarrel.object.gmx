@@ -30,8 +30,14 @@ depth = -y;
 image_speed = 0;
 image_index = irandom(image_number-1);
 if instance_nearest(x,y,obj_explosivebarrel) !=id{
+    tell = 0;
     instance_destroy();
 }
+///sync
+barrel_id = global.barrelnum;
+global.barrelnum++;
+gui = 0;
+tell = 1;
 </string>
           </argument>
         </arguments>
@@ -59,6 +65,16 @@ if (active){
     instance_create(x,y,obj_explosion);
     instance_create(x,y,obj_explosivebarrel_dead);
     obj_view.shake+=10;
+}
+if (tell){
+    ///tell server to destroy number
+    global.barrelcheck = barrel_id;
+    with (obj_client){
+        buffer_seek(send_buffer, buffer_seek_start, 0);
+        buffer_write(send_buffer, buffer_u8, netc_barreldestroy);
+        buffer_write(send_buffer, buffer_u16, global.barrelcheck);
+        network_send_raw(socket_id, send_buffer, buffer_tell(send_buffer));
+    }
 }
 </string>
           </argument>

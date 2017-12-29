@@ -119,6 +119,20 @@ while(true) {
         }
         
         break;
+    case netc_barreldestroy:
+        var barrelid = buffer_read(buffer, buffer_u16); 
+               
+        buffer_seek(send_buffer, buffer_seek_start, 0);
+        buffer_write(send_buffer, buffer_u8, netc_barreldestroy);
+        buffer_write(send_buffer, buffer_u16, barrelid);
+        
+        with(obj_serverClient) {
+            if(client_id != curr_client_id) {
+                network_send_raw(self.socket_id, other.send_buffer, 3);
+            }
+        }
+        
+        break;
         
     }
     if(buffer_tell(buffer) == buffer_get_size(buffer)) {
