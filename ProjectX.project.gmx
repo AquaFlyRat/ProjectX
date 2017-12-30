@@ -140,6 +140,7 @@
   <rooms name="rooms">
     <room>rooms\rm_init</room>
     <room>rooms\rm_lobby</room>
+    <room>rooms\rm_level1</room>
   </rooms>
   <constants number="12">
     <constant name="netc_bullet_fired">3</constant>
