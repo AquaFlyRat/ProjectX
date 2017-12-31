@@ -159,7 +159,7 @@ cooldown--;
           <argument>
             <kind>1</kind>
             <string>///deactivate
-if active &amp;&amp; (cooldown&lt;=0){
+if (active&gt;0) &amp;&amp; (cooldown&lt;=0){
     active = 0;
     cooldown = 5;
 }
@@ -186,7 +186,7 @@ if active &amp;&amp; (cooldown&lt;=0){
           <argument>
             <kind>1</kind>
             <string>///activate
-if !active{
+if active==0{
     active = 1;
     cooldown = 5;
 }
@@ -280,7 +280,8 @@ if (active == 2 &amp;&amp; cooldown &lt;= 0 ) {
     create_client(ip, port, nickname);
     
     
-    active = 0;
+    active = -1;
+    btn_createServer.active = -1;
 }
 </string>
           </argument>

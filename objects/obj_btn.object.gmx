@@ -99,8 +99,13 @@ scale = .5;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
-text_draw(x-text_length(text,spr_font_a,scale)*.5,y-16,text,spr_font_a,c_white,scale,1,false);
+            <string>if (active != -1){
+    var col = c_white;
+}else{
+    var col = c_black;
+}
+draw_self();
+text_draw(x-text_length(text,spr_font_a,scale)*.5,y-16,text,spr_font_a,col,scale,1,false);
 </string>
           </argument>
         </arguments>

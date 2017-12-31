@@ -214,13 +214,14 @@ if instance_exists(obj_bullet){
             <string>var ofx = 7*image_xscale;
 var ofy = -3;
 var inc_dir = 0; 
+var col = make_colour_rgb(226,179,14)
 if image_xscale&lt;0{inc_dir = 180}
 draw_sprite_ext(spr_testgun,0,x+ofx,y+ofy,image_xscale,image_yscale,0/*gun_dir+inc_dir*/,c_white,image_alpha);
 draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,c_white,image_alpha);
 
 var ny = y - (sprite_height / 2) - 7;
 var nx = x - text_length(nickname, spr_font_a, 0.5) / 2;
-text_draw(nx, ny, nickname, spr_font_a, c_yellow, 0.5, 1, false);
+text_draw(nx, ny, nickname, spr_font_a, col, 0.5, 1, false);
 </string>
           </argument>
         </arguments>

@@ -163,10 +163,15 @@ network_destroy(socket_id);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var col = c_yellow;
+            <string>var col = c_white;
 var str = "[Client]";
-text_draw(10, 30, str, spr_font_a, col, 1, 1, false);
-text_draw(10, 50, obj_player.nickname, spr_font_a, col, 1, 1, false);
+var str2 = string(obj_player.nickname);
+var vw = view_wview*obj_view.view_zoom;
+var vh = view_hview*obj_view.view_zoom;
+var sc = 1;
+
+text_draw(vw*.5-text_length(str,spr_font_a,sc)*.5,25,str,spr_font_b,col,sc,1,false);
+text_draw(vw*.5-text_length(str2,spr_font_a,sc)*.5,40,str2,spr_font_b,col,sc,1,false);
 
 </string>
           </argument>
