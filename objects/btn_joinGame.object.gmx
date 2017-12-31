@@ -276,8 +276,8 @@ if (active == 2 &amp;&amp; cooldown &lt;= 0 ) {
     var ip = n1 + "." + n2 + "." + n3 + "." + n4;
     
     var port = real(portname);
-    
-    create_client(ip, port);
+    obj_player.nickname=nickname;
+    create_client(ip, port, nickname);
     
     
     active = 0;

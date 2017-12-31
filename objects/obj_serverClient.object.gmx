@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>client_id = -1;
 socket_id = -1;
+nickname = "";
 </string>
           </argument>
         </arguments>

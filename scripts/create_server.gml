@@ -19,6 +19,43 @@ if(curr_client_id < 0) {
 while(true) {
     var msg_id = buffer_read(buffer, buffer_u8);
     switch(msg_id) {
+    case netc_client_joined:
+        var nickname_ = buffer_read(buffer, buffer_string);
+        client_map[? string(sock_id)].nickname = nickname_;
+        
+        var xx = buffer_read(buffer, buffer_u16);
+        var yy = buffer_read(buffer, buffer_u16);
+        
+        buffer_seek(send_buffer, buffer_seek_start, 0);
+        buffer_write(send_buffer, buffer_u8, netc_client_joined);
+        buffer_write(send_buffer, buffer_u16, curr_client_id);
+        buffer_write(send_buffer, buffer_string, nickname_);
+        buffer_write(send_buffer, buffer_u16, xx);
+        buffer_write(send_buffer, buffer_u16, yy);
+        
+        // Send nickname of the recently connected client to all clients currently
+        // connected.
+        with(obj_serverClient) {
+            if(client_id != curr_client_id) {
+                network_send_raw(self.socket_id, other.send_buffer, buffer_tell(other.send_buffer));
+            }
+        }
+        
+        // Send nicknames of already connected clients to the client just connected.
+        with(obj_serverClient) {
+            buffer_seek(other.send_buffer, buffer_seek_start, 0);
+            buffer_write(other.send_buffer, buffer_u8, netc_client_joined);
+            buffer_write(other.send_buffer, buffer_u16, client_id);
+            buffer_write(other.send_buffer, buffer_string, nickname);
+            buffer_write(other.send_buffer, buffer_u16, xx);
+            buffer_write(other.send_buffer, buffer_u16, yy);
+        
+            if(client_id != curr_client_id) {
+                network_send_raw(sock_id, other.send_buffer, buffer_tell(other.send_buffer));    
+            }
+        }
+        
+        break;
     case netc_bullet_fired:
         var xx = buffer_read(buffer, buffer_u16);
         var yy = buffer_read(buffer, buffer_u16);
