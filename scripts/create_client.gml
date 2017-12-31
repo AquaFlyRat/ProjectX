@@ -1,6 +1,7 @@
 #define create_client
 var ip = argument0;
 var port = argument1;
+var nickname = argument2;
 
 var client = instance_create(0, 0, obj_client);
 
@@ -12,6 +13,16 @@ if(server < 0)
 
 client.socket_id = client_socket;
 
+with(client) {
+    buffer_seek(send_buffer, buffer_seek_start, 0);
+    buffer_write(send_buffer, buffer_u8, netc_client_joined);
+    buffer_write(send_buffer, buffer_string, nickname);
+    buffer_write(send_buffer, buffer_u16, round(obj_player.x));
+    buffer_write(send_buffer, buffer_u16, round(obj_player.y));
+    
+    network_send_raw(socket_id, send_buffer, buffer_tell(send_buffer));
+}
+
 
 #define client_recieve_data
 var buffer = ds_map_find_value(async_load, "buffer");
@@ -19,6 +30,22 @@ var buffer = ds_map_find_value(async_load, "buffer");
 while(true) {
     var msg_id = buffer_read(buffer, buffer_u8);
     switch(msg_id) {
+    case netc_client_joined:
+        var cid = buffer_read(buffer, buffer_u16);
+        var nickname_ = buffer_read(buffer, buffer_string);
+        var xx = buffer_read(buffer, buffer_u16);
+        var yy = buffer_read(buffer, buffer_u16);
+        
+        if(ds_map_exists(client_map, string(cid))) {
+            client_map[? string(cid)].nickname = nickname_;
+        } else {
+            var c = instance_create(xx, yy, obj_netplayer);
+            client_map[? string(cid)] = c;
+            c.client_id = cid;
+            c.nickname = nickname_;
+        }
+        
+        break;
     case netc_player_leave:
         var cid = buffer_read(buffer, buffer_u16);
         with(client_map[? string(cid)]) {

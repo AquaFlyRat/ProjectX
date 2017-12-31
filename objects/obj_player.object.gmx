@@ -52,6 +52,7 @@ vspd = 0;
 gun_dir = 0;
 shoot = 0;
 ftat = 1;
+nickname="";
 </string>
           </argument>
         </arguments>
