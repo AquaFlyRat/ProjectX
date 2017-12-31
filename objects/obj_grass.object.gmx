@@ -97,6 +97,7 @@ swayat+=sway;
 swayscale = distance(x,0,global.wind,0);
 swayscale = clamp(swayscale,-50,50);
 swayscale = .25+(((50-swayscale)/50))*3
+/*
 if abs(sw-swl)&gt;.5{
     sfx_emit(x,y,snd_rustle0);
 }

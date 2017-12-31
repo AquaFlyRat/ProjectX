@@ -9,4 +9,4 @@ if instance_exists(obj_player){
 }
 d = clamp(d,1,100)
 var snd = audio_play_sound(sid,1,false);
-audio_sound_gain(snd,5/d,0);
+audio_sound_gain(snd,10/d,0);
