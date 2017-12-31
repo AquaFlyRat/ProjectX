@@ -4,7 +4,14 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\snd_shoot</sound>
+    <sound>sound\snd_damage0</sound>
+    <sound>sound\snd_damage1</sound>
+    <sound>sound\snd_explode2</sound>
+    <sound>sound\snd_explode1</sound>
+    <sound>sound\snd_explode0</sound>
+  </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_font_a</sprite>
     <sprite>sprites\spr_font_b</sprite>
@@ -57,6 +64,7 @@
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
+    <script>scripts\sfx_emit.gml</script>
     <script>scripts\distance.gml</script>
     <scripts name="text">
       <script>scripts\digit_check.gml</script>

@@ -29,6 +29,7 @@
 image_angle = irandom(360);
 image_speed = .25;
 depth = -10000;
+sfx_emit(x,y,choose(snd_explode0,snd_explode1,snd_explode2));
 </string>
           </argument>
         </arguments>
