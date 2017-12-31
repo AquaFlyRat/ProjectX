@@ -25,12 +25,45 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///seperate vars
+            <string>///num vars
 global.ammonum = 0;
 global.ammocheck = 0;
 
 global.barrelnum = 0;
 global.barrelcheck = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///weapon vars
+//references
+wp_name = 0;
+wp_weapontype = 4;
+wp_maxammo = 1;
+wp_ammotype = 2;
+wp_speed = 3;
+/////////////////////////////////safety gun
+global.weapon[0,wp_name] = "safety gun";
+global.weapon[0,wp_maxammo] = 20;
+global.weapon[0,wp_ammotype] = obj_bullet;
+global.weapon[0,wp_weapontype] = spr_testgun;
+global.weapon[0,wp_speed] = 20;
 </string>
           </argument>
         </arguments>

@@ -33,14 +33,9 @@ wp_maxammo = 1;
 wp_ammotype = 2;
 wp_speed = 3;
 //weapon array
-weapon[0,wp_name] = "test gun";
-weapon[0,wp_maxammo] = 20;
-weapon[0,wp_ammotype] = obj_bullet;
-weapon[0,wp_weapontype] = spr_testgun;
-weapon[0,wp_speed] = 10;
 //vars
 gun = 0;
-ammo = weapon[gun,wp_maxammo];
+ammo = global.weapon[gun,wp_maxammo];
 hp = 10;
 dead = 0;
 //motion
@@ -201,7 +196,7 @@ if (shoot) &amp;&amp; (alarm[0] = -1){
         var ofy = -3;
         ofx+=lengthdir_x(8,gun_dir);        //find gun position
         ofy+=lengthdir_y(8,gun_dir);        //find gun position
-        var b = instance_create(round(x+ofx),round(y+ofy),weapon[gun,wp_ammotype]);
+        var b = instance_create(round(x+ofx),round(y+ofy),global.weapon[gun,wp_ammotype]);
         b.dir = round(gun_dir);     //bullet direction
         b.spd = round(5+hspd);     //bullet speed
         b.par = id;         //set self as identifiable parent
@@ -211,7 +206,7 @@ if (shoot) &amp;&amp; (alarm[0] = -1){
         }
         
         //reset timer
-        alarm[0] = weapon[gun,wp_speed];
+        alarm[0] = global.weapon[gun,wp_speed];
     }else{
         shoot = 0;
     }
@@ -238,13 +233,14 @@ if (shoot) &amp;&amp; (alarm[0] = -1){
             <kind>1</kind>
             <string>///ammo
 if place_meeting(x,y,obj_ammo) &amp;&amp; !dead{
-    if ammo&lt;weapon[gun,wp_maxammo]{
+    if ammo&lt;global.weapon[gun,wp_maxammo]{
         with(instance_nearest(x,y,obj_ammo)){
             instance_destroy();
         }
         ammo+=5;
     }
 }
+ammo = clamp(ammo,0,global.weapon[gun,wp_maxammo]);
 </string>
           </argument>
         </arguments>
@@ -465,7 +461,8 @@ if sprite_index == spr_hazmat_run{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///heartrate
+            <string>///hud
+///////////////heartrate
 var col = c_white;
 if hp&gt;7{col = c_white}
 if hp&lt;7{col = make_colour_rgb(226,179,14);}
@@ -511,9 +508,11 @@ if hp&gt;0{
 var hpxs = 1, hpys = 1;
 draw_set_color(col);
 for(i=0;i&lt;90;i++){
-    draw_line_width(48+(i*hpxs),view_hview*scale-80-hmy[i]*hpys,48+((i+1)*hpxs),view_hview*scale-80-(hmy[i+1])*hpys,4)
+    draw_line_width(48+(i*hpxs),view_hview*scale-60-hmy[i]*hpys,48+((i+1)*hpxs),view_hview*scale-60-(hmy[i+1])*hpys,4)
 }
-text_draw(150,view_hview*scale-80,string(hp),spr_font_a,col,scale*.5,1,0);
+text_draw(150,view_hview*scale-60,"hp:"+string(hp),spr_font_a,col,1,1,0);
+///////////////ammo
+text_draw(150,view_hview*scale-40,"ammo:"+string(ammo)+"/"+string(global.weapon[wp_maxammo]),spr_font_a,col,1,1,0);
 draw_set_color(c_black);
 </string>
           </argument>
@@ -544,7 +543,7 @@ if hp&gt;0{
     var ofy = -3;
     var inc_dir = 0; 
     if image_xscale&lt;0{inc_dir = 180}
-    draw_sprite_ext(weapon[gun,wp_weapontype],0,x+ofx,y+ofy,image_xscale,image_yscale,gun_dir+inc_dir,c_white,image_alpha);
+    draw_sprite_ext(global.weapon[gun,wp_weapontype],0,x+ofx,y+ofy,image_xscale,image_yscale,gun_dir+inc_dir,c_white,image_alpha);
 }
 //self
 draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,c_white,image_alpha);
