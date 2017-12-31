@@ -4,10 +4,14 @@ var server = network_create_server_raw(network_socket_tcp, std_port, max_clients
 var server_controller = instance_create(0, 0, obj_server);
 server_controller.socket_id = server;
 
+//create_client("127.0.0.1", 6510, "server");
+
 return server_controller;
 
 #define server_recieve_data
 var sock_id = ds_map_find_value(async_load, "id");
+
+if(sock_id != obj_server.socket_id) {
 var buffer = ds_map_find_value(async_load, "buffer");
 
 var curr_client_id = client_map[? string(sock_id)].client_id;
@@ -175,8 +179,7 @@ while(true) {
     if(buffer_tell(buffer) == buffer_get_size(buffer)) {
         break;
     }
-    
-    
+}
 }
 
 #define server_recieve_client_connect

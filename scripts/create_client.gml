@@ -25,6 +25,9 @@ with(client) {
 
 
 #define client_recieve_data
+var eventid = ds_map_find_value(async_load, "id");
+if(eventid == socket_id) {
+
 var buffer = ds_map_find_value(async_load, "buffer");
 
 while(true) {
@@ -159,8 +162,7 @@ while(true) {
     if(buffer_tell(buffer) == buffer_get_size(buffer)) {
         break;
     }
-    
-    
+}
 }
 
 #define client_send_move_data
