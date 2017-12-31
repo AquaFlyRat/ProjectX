@@ -47,7 +47,6 @@
     <sprite>sprites\spr_client</sprite>
     <sprite>sprites\spr_btn</sprite>
     <sprite>sprites\spr_client_ext</sprite>
-    <sprite>sprites\sprite41</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_roof</background>
