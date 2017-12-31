@@ -205,13 +205,6 @@ draw_set_alpha(1);
             <string>if (active){
     create_server();
     active = -1;
-    btn_joinGame.active = -1;
-    //client
-    var ip = "127.0.0.1";
-    
-    var port = 6510;
-    obj_player.nickname=nickname;
-    create_client(ip, port, nickname);
 }
 </string>
           </argument>
