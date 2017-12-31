@@ -37,6 +37,7 @@ swayscale = 2;
 image_speed = 0;
 image_index = irandom(image_number-1)
 image_xscale = choose(-1,1);
+swl = 0;
 </string>
           </argument>
         </arguments>
@@ -96,6 +97,10 @@ swayat+=sway;
 swayscale = distance(x,0,global.wind,0);
 swayscale = clamp(swayscale,-50,50);
 swayscale = .25+(((50-swayscale)/50))*3
+if abs(sw-swl)&gt;.5{
+    sfx_emit(x,y,snd_rustle0);
+}
+swl = sw;
 </string>
           </argument>
         </arguments>

@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>///var
+sfx_emit(x,y,snd_shoot0);
 activ = 1;
 </string>
           </argument>

@@ -5,9 +5,10 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound">
-    <sound>sound\snd_shoot</sound>
+    <sound>sound\snd_crush</sound>
+    <sound>sound\snd_shoot0</sound>
+    <sound>sound\snd_rustle0</sound>
     <sound>sound\snd_damage0</sound>
-    <sound>sound\snd_damage1</sound>
     <sound>sound\snd_explode2</sound>
     <sound>sound\snd_explode1</sound>
     <sound>sound\snd_explode0</sound>
@@ -54,7 +55,6 @@
     <sprite>sprites\spr_client</sprite>
     <sprite>sprites\spr_btn</sprite>
     <sprite>sprites\spr_client_ext</sprite>
-    <sprite>sprites\sprite41</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_roof</background>

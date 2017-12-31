@@ -64,6 +64,7 @@ tell = 1;
             <string>///destroy
 instance_create(x,y,obj_toxicbarrel_dead);
 obj_view.shake+=2;
+sfx_emit(x,y,snd_crush);
 if (tell) {
     ///tell server to destroy number
     global.barrelcheck = barrel_id;
