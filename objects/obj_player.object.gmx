@@ -53,6 +53,19 @@ gun_dir = 0;
 shoot = 0;
 ftat = 1;
 nickname="";
+///heart rate
+heartat = 0;
+heartmax = 1;
+heartmin = 0;
+heartspeed = 1;
+heartpause = 30;
+hmx[100] = 0;
+for (i=0;i&lt;100;i++){
+    hmx[i] = i;
+}
+hmy[100] = 0;
+hm_at = 0;
+maxhp = 10;
 </string>
           </argument>
         </arguments>
@@ -430,6 +443,78 @@ if sprite_index == spr_hazmat_run{
         ftat = -ftat;
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///heartrate
+var col = c_white;
+if hp&gt;7{col = c_white}
+if hp&lt;7{col = make_colour_rgb(226,179,14);}
+if hp&lt;5{col = make_colour_rgb(183,95,15);}
+if hp&lt;3{col = make_colour_rgb(83,9,9);}
+var scale = obj_view.view_zoom;
+//text
+heartspeed = (1+abs(10-hp))/4
+for (i=90;i&gt;=0;i--){
+    //shift
+    hmy[i+1] = hmy[i];
+}
+//heartrate
+if hp&gt;0{
+    if heartpause&gt;0{
+        heartpause-=abs(heartspeed);
+        hmy[0] = hm_at*32;
+        hm_at-=.25;
+        hm_at = clamp(hm_at,0,1);
+    }else{
+       if !heartmin{
+            hm_at-=.25;
+            hmy[0] = hm_at*32;
+            if hm_at &lt;=-.75{
+                heartmin = 1;
+                heartmax = 0;
+            }
+        } 
+        if !heartmax{
+            hm_at+=.25;
+            hmy[0] = hm_at*32;
+            if hm_at &gt;=1{
+                heartmax = 1;
+                heartmin = 0;
+                heartpause = 30;
+            }
+        }
+        
+    }
+}else{
+    hmy[0] = 0;
+}
+var hpxs = 1, hpys = 1;
+draw_set_color(col);
+for(i=0;i&lt;90;i++){
+    draw_line_width(48+(i*hpxs),view_hview*scale-80-hmy[i]*hpys,48+((i+1)*hpxs),view_hview*scale-80-(hmy[i+1])*hpys,4)
+}
+text_draw(150,view_hview*scale-80,string(hp),spr_font_a,col,scale*.5,1,0);
+draw_set_color(c_black);
 </string>
           </argument>
         </arguments>
