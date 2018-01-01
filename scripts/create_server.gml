@@ -23,6 +23,28 @@ if(curr_client_id < 0) {
 while(true) {
     var msg_id = buffer_read(buffer, buffer_u8);
     switch(msg_id) {
+    case netc_room_switch:
+        var rm_id = buffer_read(buffer, buffer_u32);
+        if(clients_ready == 0) {
+            next_room = rm_id;
+        }
+        
+        clients_ready++;
+        var clients_num = ds_map_size(client_map);
+        
+        if(clients_ready == clients_num) {
+            buffer_seek(send_buffer, buffer_seek_start, 0);
+            buffer_write(send_buffer, buffer_u8, netc_room_switch);
+            buffer_write(send_buffer, buffer_u32, next_room);
+            
+            with(obj_serverClient) {
+                network_send_raw(self.socket_id, other.send_buffer, buffer_tell(other.send_buffer));
+            }
+        
+            clients_ready = 0;
+        }
+        break;
+        
     case netc_client_joined:
         var nickname_ = buffer_read(buffer, buffer_string);
         client_map[? string(sock_id)].nickname = nickname_;
