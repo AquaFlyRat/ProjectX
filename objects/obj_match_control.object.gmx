@@ -26,12 +26,13 @@
           <argument>
             <kind>1</kind>
             <string>///init
+/*
 //assign traitor/innocence
 var pnum = 0;   //this gets set by the server: total number of players;
 var tnum = 1;   //number of traitors in a match;
     //(insert spawn players if necessary)
 var t = tnum;
-while(tnum&gt;0){
+while (tnum &gt; 0) {
     var p = instance_find(obj_player,irandom(pnum));
     if instance_exists(p) &amp;&amp; p.faction !="t"{   //if players were not created above, variable must be added to object^^
         p.faction = "t";    //mark as traitor.
@@ -44,6 +45,7 @@ for(i=0;i&lt;=instance_number(obj_player);i++){
         p.faction = "i"     //if not already marked as a traitor, mark as innocent
     }
 }
+*/
 //set time
 var mins = 10;  //minutes for round to last
 var sec = 60;
@@ -55,6 +57,34 @@ gameon  = 0;    //tells whether round is currently running
 gameover = 0;   //tells whether or not the game is won/lost/over.
 i_win = 0;      //inocent win?
 t_win = 0;      //traitor win?
+guifade = 1;
+alarm[0] = room_speed*10;
+image_alpha = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///start game
+gameon = 1;
+gamestart = 0;
 </string>
           </argument>
         </arguments>
@@ -78,12 +108,12 @@ t_win = 0;      //traitor win?
           <argument>
             <kind>1</kind>
             <string>///timer
-time--;
+if gameon{time--;}
 if time&lt;=0{
     ///gameover
     gameon = 0;
     gameover = 1;
-    t_win = 1;
+    t_win = 0;
     i_win = 0;
 }
 //clamp timer
@@ -109,6 +139,9 @@ time = clamp(time,0,10000000000);
           <argument>
             <kind>1</kind>
             <string>///check for win/loss
+var tn = 1;
+var in = 1;
+/*
 if gameon{
     var tn = 0;
     var in = 0;
@@ -118,6 +151,7 @@ if gameon{
         if p.faction=="i"{in++;}
     }
 }
+*/
 //innocent win
 if tn&lt;=0 &amp;&amp; in&gt;=1{
     ///gameover
@@ -147,7 +181,7 @@ if in&lt;=0 &amp;&amp; tn &lt;=0{
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -165,23 +199,75 @@ if in&lt;=0 &amp;&amp; tn &lt;=0{
           <argument>
             <kind>1</kind>
             <string>///draw
-if gamestart{
+//background
+var vw = view_wview*obj_view.view_zoom;
+var vh = view_hview*obj_view.view_zoom;
+var sc = 1;
+draw_set_color(c_black);
+draw_set_alpha(guifade);
+draw_rectangle(-8,-8,(vw)+8,(vh)+8,false);
+if (gamestart){
     //draw rules etc
+    if (guifade &lt; 1) {guifade = lerp(guifade,1,.1)}
+    var p1 = "You are Innocent";
+    var p2 = "find and kill the traitor"
+    text_draw(vw*.5-text_length(p1,spr_font_a,sc)*.5,vh*.5-7,p1,spr_font_a,c_white,sc,1*guifade,false);
+    text_draw(vw*.5-text_length(p2,spr_font_a,sc)*.5,vh*.5+8,p2,spr_font_a,c_white,sc,1*guifade,false);
 }
-if gameon{
+if (gameon) {
+    if (guifade &gt; 0) {guifade = lerp(guifade,0,.1)}
     //draw timer
+    var t = time;
+    var ms = t;
+    var sec = 0;
+    var mn = 0;
+    while ms&gt;=room_speed{
+        ms-=room_speed;
+        sec++;
+        while sec&gt;=60{
+            sec-=60;
+            mn++;
+        }
+    }
+    if sec&lt;10{
+        sec = "0"+string(sec);
+    }
+    var p1 = "time:"+string(mn)+":"+string(sec);    //+"."+string(ms);
+    text_draw(vw-48-text_length(p1,spr_font_a,sc),vh-40,p1,spr_font_a,c_white,sc,1-(1*guifade),false);
 }
-if gameover{
-    if i_win{
+if (gameover) {
+    if (guifade &lt; 1) {guifade = lerp(guifade,1,.1)}
+    if (i_win) {
         //innocent win
+        var p1 = "the innocent win!";
+        var p2 = "the traitor is inferior!"
+        text_draw(vw*.5-text_length(p1,spr_font_a,sc)*.5,vh*.5-7,p1,spr_font_a,c_white,sc,1*guifade,false);
+        text_draw(vw*.5-text_length(p2,spr_font_a,sc)*.5,vh*.5+8,p2,spr_font_a,c_white,sc,1*guifade,false);
     }
-    if t_win{
+    if (t_win) {
         //traitor win
+        var p1 = "the Traitor wins!";
+        var p2 = "you idiots..."
+        text_draw(vw*.5-text_length(p1,spr_font_a,sc)*.5,vh*.5-7,p1,spr_font_a,c_white,sc,1*guifade,false);
+        text_draw(vw*.5-text_length(p2,spr_font_a,sc)*.5,vh*.5+8,p2,spr_font_a,c_white,sc,1*guifade,false);
     }
-    if !t_win &amp;&amp; !i_win{
-        //draw
+    if (!t_win &amp;&amp; !i_win) &amp;&amp; time&gt;0{
+        //draw: dead
+        var p1 = "everyone died";
+        var p2 = "you are all unworthy"
+        text_draw(vw*.5-text_length(p1,spr_font_a,sc)*.5,vh*.5-7,p1,spr_font_a,c_white,sc,1*guifade,false);
+        text_draw(vw*.5-text_length(p2,spr_font_a,sc)*.5,vh*.5+8,p2,spr_font_a,c_white,sc,1*guifade,false);
+    }
+    if (!t_win &amp;&amp; !i_win) &amp;&amp; time&lt;=0{
+        //draw: time ran out
+        var p1 = "time has expired";
+        var p2 = "What a bunch of quick thinkers!"
+        text_draw(vw*.5-text_length(p1,spr_font_a,sc)*.5,vh*.5-7,p1,spr_font_a,c_white,sc,1*guifade,false);
+        text_draw(vw*.5-text_length(p2,spr_font_a,sc)*.5,vh*.5+8,p2,spr_font_a,c_white,sc,1*guifade,false);
     }
 }
+guifade = clamp(guifade,0,1);
+draw_set_alpha(1);
 </string>
           </argument>
         </arguments>
