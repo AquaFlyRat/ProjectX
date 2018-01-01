@@ -110,7 +110,9 @@ shoot = 0;
             <string>///move
 if !dead{
     var idle = 0;
-    if (room == rm_lobby) &amp;&amp; (instance_exists(btn_joinGame)) &amp;&amp; (btn_joinGame.active){idle =1;}
+    if (room == rm_lobby) &amp;&amp; (instance_exists(btn_joinGame)) &amp;&amp; ((btn_joinGame.active) || (btn_joinGame.cooldown&gt;0) || (btn_joinGame.guifade&gt;.1)){idle =1;}
+    if (room == rm_lobby) &amp;&amp; (instance_exists(btn_createServer)) &amp;&amp; ((btn_createServer.active) || (btn_createServer.cooldown&gt;0) || (btn_createServer.guifade&gt;.1)){idle = 1;}
+    if (room == rm_lobby) &amp;&amp; (instance_exists(btn_options)) &amp;&amp; ((btn_options.active) || (btn_options.cooldown&gt;0) || (btn_options.guifade&gt;.1)){idle = 1;}
     if !idle{
         var ud = (keyboard_check(ord("S")) || keyboard_check(vk_down))-(keyboard_check(ord("W")) || keyboard_check(vk_up));
         var lr = (keyboard_check(ord("D")) || keyboard_check(vk_right))-(keyboard_check(ord("A")) || keyboard_check(vk_left));
@@ -181,6 +183,7 @@ y+=vspd;        //advance vspd
 var idle = 0;
 if (room == rm_lobby) &amp;&amp; (instance_exists(btn_joinGame)) &amp;&amp; ((btn_joinGame.active) || (btn_joinGame.cooldown&gt;0) || (btn_joinGame.guifade&gt;.1)){idle =1;}
 if (room == rm_lobby) &amp;&amp; (instance_exists(btn_createServer)) &amp;&amp; ((btn_createServer.active) || (btn_createServer.cooldown&gt;0) || (btn_createServer.guifade&gt;.1)){idle = 1;}
+if (room == rm_lobby) &amp;&amp; (instance_exists(btn_options)) &amp;&amp; ((btn_options.active) || (btn_options.cooldown&gt;0) || (btn_options.guifade&gt;.1)){idle = 1;}
 gun_dir = point_direction(x+5*image_xscale,y-3,mouse_x,mouse_y);
 //shooting
 if mouse_check_button(mb_left) &amp;&amp; !idle &amp;&amp; !dead{
@@ -462,65 +465,71 @@ if sprite_index == spr_hazmat_run{
           <argument>
             <kind>1</kind>
             <string>///hud
-///////////////heartrate
-var col = c_white;
-if hp&gt;7{col = c_white}
-if hp&lt;7{col = make_colour_rgb(226,179,14);}
-if hp&lt;5{col = make_colour_rgb(183,95,15);}
-if hp&lt;3{col = make_colour_rgb(83,9,9);}
-var scale = obj_view.view_zoom;
-//text
-heartspeed = (1+abs(10-hp))/4
-for (i=90;i&gt;=0;i--){
-    //shift
-    hmy[i+1] = hmy[i];
-}
-//heartrate
-if hp&gt;0{
-    if heartpause&gt;0{
-        heartpause-=abs(heartspeed);
-        hmy[0] = hm_at*32;
-        hm_at-=.25;
-        hm_at = clamp(hm_at,0,1);
-    }else{
-       if !heartmin{
-            hm_at-=.25;
-            hmy[0] = hm_at*32;
-            if hm_at &lt;=-.75{
-                heartmin = 1;
-                heartmax = 0;
-            }
-        } 
-        if !heartmax{
-            hm_at+=.25;
-            hmy[0] = hm_at*32;
-            if hm_at &gt;=1{
-                heartmax = 1;
-                heartmin = 0;
-                heartpause = 30;
-            }
-        }
-        
+var idle = 0;
+if (room == rm_lobby) &amp;&amp; (instance_exists(btn_joinGame)) &amp;&amp; ((btn_joinGame.active) || (btn_joinGame.cooldown&gt;0)){idle =1;}
+if (room == rm_lobby) &amp;&amp; (instance_exists(btn_createServer)) &amp;&amp; ((btn_createServer.active) || (btn_createServer.cooldown&gt;0)){idle = 1;}
+if (room == rm_lobby) &amp;&amp; (instance_exists(btn_options)) &amp;&amp; ((btn_options.active) || (btn_options.cooldown&gt;0)){idle = 1;}
+if !idle{
+    ///////////////heartrate
+    var col = c_white;
+    if hp&gt;7{col = c_white}
+    if hp&lt;7{col = make_colour_rgb(226,179,14);}
+    if hp&lt;5{col = make_colour_rgb(183,95,15);}
+    if hp&lt;3{col = make_colour_rgb(83,9,9);}
+    var scale = obj_view.view_zoom;
+    //text
+    heartspeed = (1+abs(10-hp))/4
+    for (i=90;i&gt;=0;i--){
+        //shift
+        hmy[i+1] = hmy[i];
     }
-}else{
-    hmy[0] = 0;
+    //heartrate
+    if hp&gt;0{
+        if heartpause&gt;0{
+            heartpause-=abs(heartspeed);
+            hmy[0] = hm_at*32;
+            hm_at-=.25;
+            hm_at = clamp(hm_at,0,1);
+        }else{
+           if !heartmin{
+                hm_at-=.25;
+                hmy[0] = hm_at*32;
+                if hm_at &lt;=-.75{
+                    heartmin = 1;
+                    heartmax = 0;
+                }
+            } 
+            if !heartmax{
+                hm_at+=.25;
+                hmy[0] = hm_at*32;
+                if hm_at &gt;=1{
+                    heartmax = 1;
+                    heartmin = 0;
+                    heartpause = 30;
+                }
+            }
+            
+        }
+    }else{
+        hmy[0] = 0;
+    }
+    var hpxs = 1, hpys = 1;
+    draw_set_color(col);
+    for(i=0;i&lt;90;i++){
+        draw_line_width(48+(i*hpxs),view_hview*scale-80-hmy[i]*hpys,48+((i+1)*hpxs),view_hview*scale-80-(hmy[i+1])*hpys,4)
+    }
+    text_draw(150,view_hview*scale-80,"hp:"+string(hp),spr_font_a,col,1,1,0);
+    ///////////////ammo
+    col = c_white;
+    text_draw(150,view_hview*scale-60,string(global.weapon[gun,wp_name]),spr_font_a,col,1,1,0);
+    var col = c_white;
+    if ammo&gt;global.weapon[gun,wp_maxammo]*.75{col = c_white}
+    if ammo&lt;global.weapon[gun,wp_maxammo]*.75{col = make_colour_rgb(226,179,14);}
+    if ammo&lt;global.weapon[gun,wp_maxammo]*.5{col = make_colour_rgb(183,95,15);}
+    if ammo&lt;global.weapon[gun,wp_maxammo]*.25{col = make_colour_rgb(83,9,9);}
+    text_draw(150,view_hview*scale-40,"ammo:"+string(ammo)+"/"+string(global.weapon[gun,wp_maxammo]),spr_font_a,col,1,1,0);
+    draw_set_color(c_black);
 }
-var hpxs = 1, hpys = 1;
-draw_set_color(col);
-for(i=0;i&lt;90;i++){
-    draw_line_width(48+(i*hpxs),view_hview*scale-60-hmy[i]*hpys,48+((i+1)*hpxs),view_hview*scale-60-(hmy[i+1])*hpys,4)
-}
-text_draw(150,view_hview*scale-60,"hp:"+string(hp),spr_font_a,col,1,1,0);
-///////////////ammo
-col = c_white;
-text_draw(150,view_hview*scale-40,string(global.weapon[gun,wp_name]),spr_font_a,col,1,1,0);
-var col = c_white;
-if ammo&gt;global.weapon[gun,wp_maxammo]*.75{col = c_white}
-if ammo&lt;global.weapon[gun,wp_maxammo]*.75{col = make_colour_rgb(226,179,14);}
-if ammo&lt;global.weapon[gun,wp_maxammo]*.5{col = make_colour_rgb(183,95,15);}
-if ammo&lt;global.weapon[gun,wp_maxammo]*.25{col = make_colour_rgb(83,9,9);}
-text_draw(150,view_hview*scale-20,"ammo:"+string(ammo)+"/"+string(global.weapon[gun,wp_maxammo]),spr_font_a,col,1,1,0);
-draw_set_color(c_black);
 </string>
           </argument>
         </arguments>
