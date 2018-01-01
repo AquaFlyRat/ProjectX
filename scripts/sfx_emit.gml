@@ -8,6 +8,8 @@ if instance_exists(obj_player){
     d = 100;
 }
 d = clamp(d,1,100)
+var gain = 32/d;
+gain = clamp(gain,0,global.maxvol);
 var snd = audio_play_sound(sid,1,false);
 audio_sound_pitch(snd,random_range(.5,1.75));
-audio_sound_gain(snd,10/d,0);
+audio_sound_gain(snd,gain,0);

@@ -107,6 +107,7 @@ window_center();
           <argument>
             <kind>1</kind>
             <string>///resize
+/*
 if global.opt{
     if keyboard_check_pressed(ord("Q")){
         if window_scale&gt;1{

@@ -127,6 +127,7 @@
       <object>objects\obj_btn</object>
       <object>objects\btn_createServer</object>
       <object>objects\btn_joinGame</object>
+      <object>objects\btn_options</object>
     </objects>
     <objects name="net">
       <object>objects\obj_synccontrol</object>
