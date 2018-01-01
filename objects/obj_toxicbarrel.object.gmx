@@ -39,6 +39,7 @@ barrel_id = global.barrelnum;
 global.barrelnum++;
 gui = 0;
 tell = 1;
+active = 0;
 </string>
           </argument>
         </arguments>

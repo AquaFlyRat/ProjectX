@@ -17,6 +17,7 @@
     <sprite>sprites\spr_font_a</sprite>
     <sprite>sprites\spr_font_b</sprite>
     <sprite>sprites\spr_solid</sprite>
+    <sprite>sprites\spr_spawnpt</sprite>
     <sprite>sprites\spr_path</sprite>
     <sprite>sprites\spr_flooring</sprite>
     <sprite>sprites\spr_puddle</sprite>
@@ -115,6 +116,7 @@
       <object>objects\obj_snowpart</object>
       <object>objects\obj_tree</object>
       <object>objects\obj_grass</object>
+      <object>objects\obj_spawnpt</object>
       <object>objects\obj_puddle</object>
       <object>objects\obj_path</object>
       <object>objects\obj_floor</object>
@@ -130,9 +132,9 @@
       <object>objects\btn_options</object>
     </objects>
     <objects name="net">
+      <object>objects\obj_match_control</object>
       <object>objects\obj_synccontrol</object>
       <object>objects\obj_netplayer</object>
-      <object>objects\obj_match_control</object>
       <object>objects\obj_server</object>
       <object>objects\obj_client</object>
       <object>objects\obj_serverClient</object>

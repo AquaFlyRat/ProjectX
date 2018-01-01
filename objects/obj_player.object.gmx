@@ -514,8 +514,8 @@ if !idle{
         hmy[0] = 0;
     }
     var hpxs = 1, hpys = 1;
-    draw_set_color(col);
     for(i=0;i&lt;90;i++){
+        draw_set_color(col);
         draw_line_width(48+(i*hpxs),view_hview*scale-80-hmy[i]*hpys,48+((i+1)*hpxs),view_hview*scale-80-(hmy[i+1])*hpys,4)
     }
     text_draw(150,view_hview*scale-80,"hp:"+string(hp),spr_font_a,col,1,1,0);
@@ -528,8 +528,8 @@ if !idle{
     if ammo&lt;global.weapon[gun,wp_maxammo]*.5{col = make_colour_rgb(183,95,15);}
     if ammo&lt;global.weapon[gun,wp_maxammo]*.25{col = make_colour_rgb(83,9,9);}
     text_draw(150,view_hview*scale-40,"ammo:"+string(ammo)+"/"+string(global.weapon[gun,wp_maxammo]),spr_font_a,col,1,1,0);
-    draw_set_color(c_black);
 }
+draw_set_color(c_black);
 </string>
           </argument>
         </arguments>

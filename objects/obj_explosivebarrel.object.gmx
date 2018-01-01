@@ -31,6 +31,7 @@ image_speed = 0;
 image_index = irandom(image_number-1);
 if instance_nearest(x,y,obj_explosivebarrel) !=id{
     tell = 0;
+    active = 0;
     instance_destroy();
 }
 ///sync
@@ -38,6 +39,7 @@ barrel_id = global.barrelnum;
 global.barrelnum++;
 gui = 0;
 tell = 1;
+active = 0;
 </string>
           </argument>
         </arguments>
@@ -131,10 +133,10 @@ if instance_exists(obj_bullet){
             image_index = 0;
             instance_destroy();
         }
-        active = 1;
         instance_destroy();
     }
 }
+active = 1;
 </string>
           </argument>
         </arguments>
