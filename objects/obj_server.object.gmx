@@ -176,10 +176,11 @@ var sc = 1;
 var str = "[Server]: (" + string(ds_map_size(client_map)) + ") Connected";
 var ip_str = "ip: 127.0.0.1";
 var port_str = "port: " + string(std_port);
-
-text_draw(vw*.5-text_length(str,spr_font_a,sc)*.5,10,str,spr_font_b,col,sc,1,false);
-text_draw(vw*.5-text_length(port_str,spr_font_a,sc)*.5,vh-10,port_str,spr_font_b,col,sc,1,false);
-text_draw(vw*.5-text_length(ip_str,spr_font_a,sc)*.5,vh-25,ip_str,spr_font_b,col,sc,1,false);
+if (room = rm_lobby){
+    text_draw(vw*.5-text_length(str,spr_font_a,sc)*.5,10,str,spr_font_b,col,sc,1,false);
+    text_draw(vw*.5-text_length(port_str,spr_font_a,sc)*.5,vh-10,port_str,spr_font_b,col,sc,1,false);
+    text_draw(vw*.5-text_length(ip_str,spr_font_a,sc)*.5,vh-25,ip_str,spr_font_b,col,sc,1,false);
+}
 </string>
           </argument>
         </arguments>
