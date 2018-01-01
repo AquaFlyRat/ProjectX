@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>-10</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -31,6 +31,9 @@ connected_count = 0;
 clients_list = ds_list_create();
 client_map = ds_map_create();
 send_buffer = buffer_create(256, buffer_fixed, 1);
+clients_ready = 0;
+next_room = noone;
+
 alarm[0] = update_spd;
 </string>
           </argument>
