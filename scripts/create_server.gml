@@ -123,6 +123,8 @@ while(true) {
         var yy = buffer_read(buffer, buffer_u16);
         var xscale = buffer_read(buffer, buffer_s8);
         var hps = buffer_read(buffer, buffer_s16);
+        var g = buffer_read(buffer, buffer_u8);
+        var g_dir = buffer_read(buffer, buffer_s16);
         
         with(client_map[? string(sock_id)]) {
             x = xx;
@@ -137,10 +139,12 @@ while(true) {
         buffer_write(send_buffer, buffer_u16, yy);
         buffer_write(send_buffer, buffer_s8, xscale);
         buffer_write(send_buffer, buffer_s16, hps);
-        
+        buffer_write(send_buffer, buffer_u8, g);
+        buffer_write(send_buffer, buffer_s16, g_dir);
+
         with(obj_serverClient) {
             if(client_id != curr_client_id) {
-                network_send_raw(self.socket_id, other.send_buffer, 10);
+                network_send_raw(self.socket_id, other.send_buffer, 13);
             }
         }
         

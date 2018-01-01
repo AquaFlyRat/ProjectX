@@ -84,6 +84,8 @@ while(true) {
         var yy = buffer_read(buffer, buffer_u16);
         var xscale = buffer_read(buffer, buffer_s8);
         var hps = buffer_read(buffer, buffer_s16);
+        var g = buffer_read(buffer, buffer_u8);
+        var g_dir = buffer_read(buffer, buffer_s16);
         
         if(ds_map_exists(client_map, string(client_id_))) {
             var found_client = client_map[? string(client_id_)];
@@ -95,6 +97,8 @@ while(true) {
             found_client.time = 0;
             found_client.image_xscale = xscale;
             found_client.hp = hps;
+            found_client.gun = g;
+            found_client.gun_dir = g_dir;
             
         } else {
             var c = instance_create(xx, yy, obj_netplayer);
@@ -172,5 +176,7 @@ buffer_write(send_buffer, buffer_u16, round(obj_player.x));
 buffer_write(send_buffer, buffer_u16, round(obj_player.y));
 buffer_write(send_buffer, buffer_s8, round(obj_player.image_xscale));
 buffer_write(send_buffer, buffer_s16, round(obj_player.hp));
+buffer_write(send_buffer, buffer_u8, round(obj_player.gun));
+buffer_write(send_buffer, buffer_s16, round(obj_player.gun_dir));
 
 network_send_raw(socket_id, send_buffer, buffer_tell(send_buffer));
