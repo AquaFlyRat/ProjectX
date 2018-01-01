@@ -188,7 +188,7 @@ if mouse_check_button(mb_left) &amp;&amp; !idle &amp;&amp; !dead{
 }
 //shoot timer
 if (shoot) &amp;&amp; (alarm[0] = -1){
-    if ammo&gt;=0{
+    if ammo&gt;0{
         obj_view.shake+=2;
         //create bullet
         ammo--;
@@ -512,7 +512,14 @@ for(i=0;i&lt;90;i++){
 }
 text_draw(150,view_hview*scale-60,"hp:"+string(hp),spr_font_a,col,1,1,0);
 ///////////////ammo
-text_draw(150,view_hview*scale-40,"ammo:"+string(ammo)+"/"+string(global.weapon[wp_maxammo]),spr_font_a,col,1,1,0);
+col = c_white;
+text_draw(150,view_hview*scale-40,string(global.weapon[gun,wp_name]),spr_font_a,col,1,1,0);
+var col = c_white;
+if ammo&gt;global.weapon[gun,wp_maxammo]*.75{col = c_white}
+if ammo&lt;global.weapon[gun,wp_maxammo]*.75{col = make_colour_rgb(226,179,14);}
+if ammo&lt;global.weapon[gun,wp_maxammo]*.5{col = make_colour_rgb(183,95,15);}
+if ammo&lt;global.weapon[gun,wp_maxammo]*.25{col = make_colour_rgb(83,9,9);}
+text_draw(150,view_hview*scale-20,"ammo:"+string(ammo)+"/"+string(global.weapon[gun,wp_maxammo]),spr_font_a,col,1,1,0);
 draw_set_color(c_black);
 </string>
           </argument>
