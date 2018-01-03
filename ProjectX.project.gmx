@@ -74,6 +74,7 @@
       <script>scripts\init_text.gml</script>
       <script>scripts\text_draw.gml</script>
       <script>scripts\text_length.gml</script>
+      <script>scripts\text_height.gml</script>
     </scripts>
     <scripts name="net">
       <script>scripts\player_hosting_server.gml</script>
@@ -130,6 +131,10 @@
       <object>objects\btn_createServer</object>
       <object>objects\btn_joinGame</object>
       <object>objects\btn_options</object>
+      <objects name="hud">
+        <object>objects\btn_returnToLobby</object>
+        <object>objects\object44</object>
+      </objects>
     </objects>
     <objects name="net">
       <object>objects\obj_match_control</object>
@@ -148,6 +153,7 @@
     </objects>
     <objects name="menu">
       <object>objects\obj_intro</object>
+      <object>objects\obj_pauseMenu</object>
     </objects>
   </objects>
   <rooms name="rooms">
