@@ -56,58 +56,6 @@ depth = -y;
           <argument>
             <kind>1</kind>
             <string>///record
-if (active==1){
-    //fullscreen
-    if keyboard_check_pressed(vk_right) || keyboard_check_pressed(vk_left){
-        window_set_fullscreen(!window_get_fullscreen())
-    }
-    if keyboard_check_pressed(vk_enter) &amp;&amp; cooldown&lt;=0{
-        if window_get_fullscreen(){
-            active=3;
-            cooldown = 5;
-        }else{
-            active=2;
-            cooldown = 5;
-        }
-    }
-}
-if (active==2){
-    //display
-    with (obj_display){
-        if keyboard_check_pressed(vk_left){
-            if window_scale&gt;1{
-                window_scale--;
-                alarm[0] = 1;
-            }
-            //update layers
-            surface_resize(application_surface,ideal_width,ideal_height);
-            display_set_gui_size(ideal_width,ideal_height);
-            window_set_size(ideal_width*window_scale,ideal_height*window_scale);
-        }
-        if keyboard_check_pressed(vk_right){
-            if ((window_scale+1)*ideal_width&lt;display_get_width()){
-                window_scale++;
-                alarm[0] = 1;
-            }
-            //update layers
-            surface_resize(application_surface,ideal_width,ideal_height);
-            display_set_gui_size(ideal_width,ideal_height);
-            window_set_size(ideal_width*window_scale,ideal_height*window_scale);
-        }
-    }
-    if keyboard_check_pressed(vk_enter)&amp;&amp; cooldown&lt;=0{active=3;cooldown = 5;}
-    if keyboard_check_pressed(vk_backspace)&amp;&amp; cooldown&lt;=0{active=1;cooldown = 5;}
-}
-if (active==3){
-    //volume
-    if keyboard_check(vk_left){global.maxvol-=.01}
-    if keyboard_check(vk_right){global.maxvol+=.01}
-    global.maxvol = clamp(global.maxvol,0,1)
-    if keyboard_check_pressed(vk_enter)&amp;&amp; cooldown&lt;=0{
-        active = 0;
-    }
-    if keyboard_check_pressed(vk_backspace)&amp;&amp; cooldown&lt;=0{active=2;cooldown = 5;}
-}
 if active{
     if keyboard_check_pressed(vk_escape){
         cooldown = 5;
@@ -122,7 +70,7 @@ cooldown--;
         </arguments>
       </action>
     </event>
-    <event eventtype="6" enumb="53">
+    <event eventtype="6" enumb="50">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -139,10 +87,64 @@ cooldown--;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///deactivate
-if (active&gt;0) &amp;&amp; (cooldown&lt;=0){
-    active = 0;
-    cooldown = 5;
+            <string>if (active){
+    var vz = obj_view.view_zoom;
+    var xx = (mouse_x-view_xview)*vz;
+    var yy = (mouse_y-view_yview)*vz;
+    var vw = view_wview*obj_view.view_zoom;
+    var vh = view_hview*obj_view.view_zoom;
+    var y1 = vh*.5-15;
+    var y2 = vh*.5;
+    var y3 = vh*.5+15;
+    var sc = 1;
+    var act = 0;
+    if distance(0,yy,0,y1)&lt;8*sc{
+        //fullscreen
+        if xx&gt;vw*.5 || xx&lt;vw*.5{
+            window_set_fullscreen(!window_get_fullscreen())
+        }
+        act = 1;
+        cooldown = 5;
+    }
+    if distance(0,yy,0,y2)&lt;8*sc{
+        act = 1;
+        cooldown = 5;
+        //display
+        with (obj_display){
+            if xx&lt;vw*.5{
+                if window_scale&gt;1{
+                    window_scale--;
+                    alarm[0] = 1;
+                }
+                //update layers
+                surface_resize(application_surface,ideal_width,ideal_height);
+                display_set_gui_size(ideal_width,ideal_height);
+                window_set_size(ideal_width*window_scale,ideal_height*window_scale);
+            }
+            if xx&gt;vw*.5{
+                if ((window_scale+1)*ideal_width&lt;display_get_width()){
+                    window_scale++;
+                    alarm[0] = 1;
+                }
+                //update layers
+                surface_resize(application_surface,ideal_width,ideal_height);
+                display_set_gui_size(ideal_width,ideal_height);
+                window_set_size(ideal_width*window_scale,ideal_height*window_scale);
+            }
+        }
+    }
+    if distance(0,yy,0,y3)&lt;8*sc{
+        //volume
+        if xx&lt;vw*.5{global.maxvol-=.01}
+        if xx&gt;vw*.5{global.maxvol+=.01}
+        global.maxvol = clamp(global.maxvol,0,1)
+        act = 1;
+        cooldown = 5;
+    }
+    if (act == 0 &amp;&amp; cooldown &lt;= 0){
+        active = 0;
+        cooldown = 5;
+    }
 }
 </string>
           </argument>
@@ -201,23 +203,22 @@ if(active){
     var vh = view_hview*obj_view.view_zoom;
     var sc = 1;
     var p1 = "";
-    if active ==1{p1 = "fullscreen/windowed";}
-    if active ==2{p1 = "display size";}
-    if active ==3{p1 = "volume:"+string(floor(global.maxvol*100));}
+    if !window_get_fullscreen(){
+        p1 = "&lt; windowed &gt;";
+        p2 = "&lt; display size &gt;";
+    }else{
+        p1 = "&lt; fullscreen &gt;";
+        p2 = "display size: max"
+    }
+    p3 = "&lt; volume:"+string(floor(global.maxvol*100))+" &gt;";
     ///background
     draw_set_color(c_black);
     draw_set_alpha(.5*guifade);
     draw_rectangle(-8,-8,(vw)+8,(vh)+8,false);
     ///prompt
-    var n1 = "use arrows to change"
-    var n2 = "&lt;backspace/enter &gt;"
-    var n3 = "x esc x"
-    var n4 = ""
-    text_draw(vw*.5-text_length(p1,spr_font_a,sc)*.5,vh*.5-45,p1,spr_font_a,c_white,sc,1*guifade,false);
-    text_draw(vw*.5-text_length(n1,spr_font_a,sc)*.5,vh*.5-15,n1,spr_font_a,c_white,sc,1*guifade,false);
-    text_draw(vw*.5-text_length(n2,spr_font_a,sc)*.5,vh*.5,n2,spr_font_a,c_white,sc,1*guifade,false);
-    text_draw(vw*.5-text_length(n3,spr_font_a,sc)*.5,vh*.5+15,n3,spr_font_a,c_white,sc,1*guifade,false);
-    text_draw(vw*.5-text_length(n4,spr_font_a,sc)*.5,vh*.5+30,n4,spr_font_a,c_white,sc,1*guifade,false);
+    text_draw(vw*.5-text_length(p1,spr_font_a,sc)*.5,vh*.5-15,p1,spr_font_a,c_white,sc,1*guifade,false);
+    text_draw(vw*.5-text_length(p2,spr_font_a,sc)*.5,vh*.5,p2,spr_font_a,c_white,sc,1*guifade,false);
+    text_draw(vw*.5-text_length(p3,spr_font_a,sc)*.5,vh*.5+15,p3,spr_font_a,c_white,sc,1*guifade,false);
 }else{
     if guifade&gt;0{guifade = lerp(guifade,0,.1)}
 }
