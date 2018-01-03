@@ -141,6 +141,7 @@
       <object>objects\obj_serverBullet</object>
     </objects>
     <objects name="display">
+      <object>objects\obj_mouseguitest</object>
       <object>objects\obj_sh_control</object>
       <object>objects\obj_view</object>
       <object>objects\obj_display</object>
