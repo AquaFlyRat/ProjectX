@@ -166,12 +166,15 @@ network_destroy(socket_id);
             <string>var col = c_white;
 var str = "[Client] Connected";
 var str2 = string(obj_player.nickname);
+var str3 = "Press [Y] to ready up";
 var vw = view_wview*obj_view.view_zoom;
 var vh = view_hview*obj_view.view_zoom;
 var sc = 1;
+if (obj_player.ready) {str3 = "Ready!"}
 if (room == rm_lobby) {
     text_draw(vw*.5-text_length(str,spr_font_a,sc)*.5,25,str,spr_font_b,col,sc,1,false);
     text_draw(vw*.5-text_length(str2,spr_font_a,sc)*.5,40,str2,spr_font_a,col,sc,1,false);
+    text_draw(vw*.5-text_length(str2,spr_font_b,sc)*.5,vh-10,str3,spr_font_b,col,sc,1,false);
 }else{
     text_draw(vw*.5-text_length(str2,spr_font_a,sc)*.5,25,str2,spr_font_b,col,sc,1,false);
 }
