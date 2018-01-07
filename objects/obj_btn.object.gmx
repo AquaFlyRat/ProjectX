@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>has_hover_effect = true;
 scale = .5;
+inside = false;
 </string>
           </argument>
         </arguments>
@@ -49,8 +50,11 @@ scale = .5;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(has_hover_effect) {
-    scale -= 0.25;
+            <string>if(!obj_player.paused &amp;&amp; inside) {
+    if(has_hover_effect) {
+        scale -= 0.25;
+        inside = false;
+    }
 }
 </string>
           </argument>
@@ -74,8 +78,11 @@ scale = .5;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(has_hover_effect) {
-    scale += 0.25;
+            <string>if(!obj_player.paused &amp;&amp; !inside) {
+    if(has_hover_effect) {
+        scale += 0.25;
+        inside = true;
+    }
 }
 </string>
           </argument>

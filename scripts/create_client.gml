@@ -33,6 +33,9 @@ var buffer = ds_map_find_value(async_load, "buffer");
 while(true) {
     var msg_id = buffer_read(buffer, buffer_u8);
     switch(msg_id) {
+    case netc_client_return_to_lobby:
+        var cid = buffer_read(buffer,buffer_u16);
+        
     case netc_room_switch:
         var next_rm = buffer_read(buffer, buffer_u32);
         room_goto(next_rm);

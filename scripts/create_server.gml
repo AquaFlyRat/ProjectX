@@ -23,6 +23,18 @@ if(curr_client_id < 0) {
 while(true) {
     var msg_id = buffer_read(buffer, buffer_u8);
     switch(msg_id) {
+    case netc_client_return_to_lobby:
+        clients_num--;
+        buffer_seek(send_buffer, buffer_seek_start,0);
+        buffer_write(send_buffer,buffer_u8, netc_client_return_to_lobby);
+        buffer_write(send_buffer,buffer_u16,curr_client_id);
+        with(obj_serverClient) {
+            if(client_id != curr_client_id) {
+                network_send_raw(self.socket_id, other.send_buffer,3);
+            }
+        }
+        break;
+        
     case netc_room_switch:
         var rm_id = buffer_read(buffer, buffer_u32);
         if(clients_ready == 0) {

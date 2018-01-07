@@ -62,19 +62,6 @@ hmy[100] = 0;
 hm_at = 0;
 maxhp = 10;
 paused=false;
-ready = 0;
-///move to spawn
-if (instance_exists(obj_spawnpt)){
-    var n = instance_find(obj_spawnpt, irandom_range(1, instance_number(obj_spawnpt)) )
-    if (instance_exists(n)) {
-        x = n.x;
-        y = n.y;
-        obj_view.x = x;
-        obj_view.y = y;
-    }
-}
-//etc
-faction = "i";
 </string>
           </argument>
         </arguments>
@@ -122,57 +109,76 @@ shoot = 0;
           <argument>
             <kind>1</kind>
             <string>///move
-if !dead{
-    var idle = 0;
-    if (room == rm_lobby) &amp;&amp; (instance_exists(btn_joinGame)) &amp;&amp; ((btn_joinGame.active) || (btn_joinGame.cooldown&gt;0) || (btn_joinGame.guifade&gt;.1)){idle =1;}
-    if (room == rm_lobby) &amp;&amp; (instance_exists(btn_createServer)) &amp;&amp; ((btn_createServer.active) || (btn_createServer.cooldown&gt;0) || (btn_createServer.guifade&gt;.1)){idle = 1;}
-    if (room == rm_lobby) &amp;&amp; (instance_exists(btn_options)) &amp;&amp; ((btn_options.active) || (btn_options.cooldown&gt;0) || (btn_options.guifade&gt;.1)){idle = 1;}
-    if !idle{
-        var ud = (keyboard_check(ord("S")) || keyboard_check(vk_down))-(keyboard_check(ord("W")) || keyboard_check(vk_up));
-        var lr = (keyboard_check(ord("D")) || keyboard_check(vk_right))-(keyboard_check(ord("A")) || keyboard_check(vk_left));
-    }else{
-        ud = 0;
-        lr = 0;
+
+if (!paused) {
+    if (!dead) {
+        var idle = 0;
+        if (room == rm_lobby) &amp;&amp; (instance_exists(btn_joinGame)) &amp;&amp; ((btn_joinGame.active) || (btn_joinGame.cooldown&gt;0) || (btn_joinGame.guifade&gt;.1)) {
+         idle =1;
+        }
+        
+        if (room == rm_lobby) &amp;&amp; (instance_exists(btn_createServer)) &amp;&amp; ((btn_createServer.active) || (btn_createServer.cooldown&gt;0) || (btn_createServer.guifade&gt;.1)) {
+            idle = 1;
+        }
+        
+        if (room == rm_lobby) &amp;&amp; (instance_exists(btn_options)) &amp;&amp; ((btn_options.active) || (btn_options.cooldown&gt;0) || (btn_options.guifade&gt;.1)) {
+            idle = 1;
+        }
+        
+        if (!idle) {
+            var ud = (keyboard_check(ord("S")) || keyboard_check(vk_down))-(keyboard_check(ord("W")) || keyboard_check(vk_up));
+            var lr = (keyboard_check(ord("D")) || keyboard_check(vk_right))-(keyboard_check(ord("A")) || keyboard_check(vk_left));
+        } else {
+            ud = 0;
+            lr = 0;
+        }
+        
+        var hsp = lr * spdmax;
+        var vsp = ud * spdmax;
+    } else {
+        hsp = 0;
+        vsp = 0;
     }
-    var hsp = lr*spdmax;
-    var vsp = ud*spdmax;
-}else{
-    hsp = 0;
-    vsp = 0;
-}
-//hspeed
-if abs(hsp) != 0{
-    //if moving, speed buildup
-    hspd = lerp(hspd,hsp,spdlerp);
-    image_xscale = sign(hspd);
-}else{
-    //if stopping, friction slowdown
-    hspd = lerp(hspd,hsp,frclerp);
-}
-//vspeed
-depth = -y;
-if abs(vsp) != 0{
-    //if moving, speed buildup
-    vspd = lerp(vspd,vsp,spdlerp);
-}else{
-    //if stopping, friction slowdown
-    vspd = lerp(vspd,vsp,frclerp);
-}
-//hor collisions
-if place_meeting(x+hspd,y,par_col){     //if collision at speed
-    while(!place_meeting(x+sign(hspd),y,par_col)){  
-        x+=sign(hspd);      //move to edge
+    
+    //hspeed
+    if (abs(hsp) != 0) {
+        //if moving, speed buildup
+        hspd = lerp(hspd,hsp,spdlerp);
+        image_xscale = sign(hspd);
+    } else {
+        //if stopping, friction slowdown
+        hspd = lerp(hspd,hsp,frclerp);
     }
-    hspd = 0;       //stop moving
-}
-x+=hspd;        //advance hspd
-if place_meeting(x,y+vspd,par_col){     //if collision at speed
-    while(!place_meeting(x,y+sign(vspd),par_col)){  
-        y+=sign(vspd);      //move to edge
+    
+    //vspeed
+    depth = -y;
+    if (abs(vsp) != 0) {
+        //if moving, speed buildup
+        vspd = lerp(vspd,vsp,spdlerp);
+    } else {
+        //if stopping, friction slowdown
+        vspd = lerp(vspd,vsp,frclerp);
     }
-    vspd = 0;       //stop moving
+    
+    //hor collisions
+    if (place_meeting(x+hspd,y,par_col)) { // if collision at speed
+        while (!place_meeting(x+sign(hspd),y,par_col)) {  
+            x += sign(hspd);      //move to edge
+        }
+        
+        hspd = 0; // stop moving
+    }
+    x += hspd; // advance hspd
+    
+    if (place_meeting(x,y+vspd,par_col)) { //if collision at speed
+        while (!place_meeting(x,y+sign(vspd),par_col)) {  
+            y += sign(vspd);      //move to edge
+        }
+        
+        vspd = 0;       //stop moving
+    }
+    y+=vspd;        //advance vspd
 }
-y+=vspd;        //advance vspd
 </string>
           </argument>
         </arguments>
@@ -194,38 +200,41 @@ y+=vspd;        //advance vspd
           <argument>
             <kind>1</kind>
             <string>///shoot
-var idle = 0;
-if (room == rm_lobby) &amp;&amp; (instance_exists(btn_joinGame)) &amp;&amp; ((btn_joinGame.active) || (btn_joinGame.cooldown&gt;0) || (btn_joinGame.guifade&gt;.1)){idle =1;}
-if (room == rm_lobby) &amp;&amp; (instance_exists(btn_createServer)) &amp;&amp; ((btn_createServer.active) || (btn_createServer.cooldown&gt;0) || (btn_createServer.guifade&gt;.1)){idle = 1;}
-if (room == rm_lobby) &amp;&amp; (instance_exists(btn_options)) &amp;&amp; ((btn_options.active) || (btn_options.cooldown&gt;0) || (btn_options.guifade&gt;.1)){idle = 1;}
-gun_dir = point_direction(x+5*image_xscale,y-3,mouse_x,mouse_y);
-//shooting
-if mouse_check_button(mb_left) &amp;&amp; !idle &amp;&amp; !dead{
-    shoot = 1;
-}
-//shoot timer
-if (shoot) &amp;&amp; (alarm[0] = -1){
-    if ammo&gt;0{
-        obj_view.shake+=2;
-        //create bullet
-        ammo--;
-        var ofx = 5*image_xscale;
-        var ofy = -3;
-        ofx+=lengthdir_x(8,gun_dir);        //find gun position
-        ofy+=lengthdir_y(8,gun_dir);        //find gun position
-        var b = instance_create(round(x+ofx),round(y+ofy),global.weapon[gun,wp_ammotype]);
-        b.dir = round(gun_dir);     //bullet direction
-        b.spd = round(5+hspd);     //bullet speed
-        b.par = id;         //set self as identifiable parent
-        
-        with(obj_client) {
-            client_fired_bullet_dispatch(other.x + ofx, other.y + ofy, other.gun_dir, 5 + other.hspd, 0); //need new id system
+if(!paused) {
+    var idle = 0;
+    if (room == rm_lobby) &amp;&amp; (instance_exists(btn_joinGame)) &amp;&amp; ((btn_joinGame.active) || (btn_joinGame.cooldown&gt;0) || (btn_joinGame.guifade&gt;.1)){idle =1;}
+    if (room == rm_lobby) &amp;&amp; (instance_exists(btn_createServer)) &amp;&amp; ((btn_createServer.active) || (btn_createServer.cooldown&gt;0) || (btn_createServer.guifade&gt;.1)){idle = 1;}
+    if (room == rm_lobby) &amp;&amp; (instance_exists(btn_options)) &amp;&amp; ((btn_options.active) || (btn_options.cooldown&gt;0) || (btn_options.guifade&gt;.1)){idle = 1;}
+    gun_dir = point_direction(x+5*image_xscale,y-3,mouse_x,mouse_y);
+    //shooting
+    if mouse_check_button(mb_left) &amp;&amp; !idle &amp;&amp; !dead{
+        shoot = 1;
+    }
+    
+    //shoot timer
+    if (shoot) &amp;&amp; (alarm[0] = -1){
+        if ammo&gt;0{
+            obj_view.shake+=2;
+            //create bullet
+            ammo--;
+            var ofx = 5*image_xscale;
+            var ofy = -3;
+            ofx+=lengthdir_x(8,gun_dir);        //find gun position
+            ofy+=lengthdir_y(8,gun_dir);        //find gun position
+            var b = instance_create(round(x+ofx),round(y+ofy),global.weapon[gun,wp_ammotype]);
+            b.dir = round(gun_dir);     //bullet direction
+            b.spd = round(5+hspd);     //bullet speed
+            b.par = id;         //set self as identifiable parent
+            
+            with(obj_client) {
+                client_fired_bullet_dispatch(other.x + ofx, other.y + ofy, other.gun_dir, 5 + other.hspd, 0); //need new id system
+            }
+            
+            //reset timer
+            alarm[0] = global.weapon[gun,wp_speed];
+        }else{
+            shoot = 0;
         }
-        
-        //reset timer
-        alarm[0] = global.weapon[gun,wp_speed];
-    }else{
-        shoot = 0;
     }
 }
 </string>
@@ -478,7 +487,6 @@ if sprite_index == spr_hazmat_run{
             <kind>1</kind>
             <string>/// check for ready
 if(keyboard_check_pressed(ord('Y'))) {
-    ready = 1;
     with(obj_client) {
         buffer_seek(send_buffer, buffer_seek_start, 0);
         buffer_write(send_buffer, buffer_u8, netc_room_switch);
