@@ -278,8 +278,7 @@ if (active == 2 &amp;&amp; cooldown &lt;= 0 ) {
     var port = real(portname);
     obj_player.nickname=nickname;
     create_client(ip, port, nickname);
-    
-    
+    //obj_player.in_game = true;
     active = -1;
     btn_createServer.active = -1;
 }

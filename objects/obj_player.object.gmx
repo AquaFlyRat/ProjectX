@@ -62,6 +62,8 @@ hmy[100] = 0;
 hm_at = 0;
 maxhp = 10;
 paused=false;
+in_game=false;
+ready = false;
 </string>
           </argument>
         </arguments>
@@ -488,6 +490,7 @@ if sprite_index == spr_hazmat_run{
             <string>/// check for ready
 if(keyboard_check_pressed(ord('Y'))) {
     with(obj_client) {
+        obj_player.ready = true;
         buffer_seek(send_buffer, buffer_seek_start, 0);
         buffer_write(send_buffer, buffer_u8, netc_room_switch);
         buffer_write(send_buffer, buffer_u32, rm_level1);

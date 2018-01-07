@@ -133,7 +133,6 @@
       <object>objects\btn_options</object>
       <objects name="hud">
         <object>objects\btn_returnToLobby</object>
-        <object>objects\object44</object>
       </objects>
     </objects>
     <objects name="net">

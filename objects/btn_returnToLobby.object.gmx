@@ -28,29 +28,34 @@
             <string>var text = "Return to Lobby";
 var font = spr_font_b;
 var scale = 1;
+
+var vz = obj_view.view_zoom;
+var mousex = (mouse_x-view_xview)*vz;
+var mousey = (mouse_y-view_yview)*vz;
 var vw = view_wview*obj_view.view_zoom;
 var vh = view_hview*obj_view.view_zoom;
 
-var _x = (vw / 2) - (text_length(text, font, scale) / 2);
-var _y = (vh / 2) - (text_height(font, scale) / 2);
-var vz = obj_view.view_zoom;
-var mx = (mouse_x-view_xview)*vz;
-var my = (mouse_y-view_yview)*vz;
+var textw = text_length(text, font, scale);
+var texth = text_height(font, scale);
 
-var hity = _y-text_height(font,scale)/2;
-if(my &gt; hity &amp;&amp; my &lt; hity + text_height(font,scale) &amp;&amp; 
-   mx &gt; _x &amp;&amp; mx &lt; _x + text_length(text,font,scale)) {
-    if(mouse_check_button_pressed(mb_left)) {
-        with(obj_client) {
-            buffer_seek(send_buffer, buffer_seek_start, 0);
-            buffer_write(send_buffer, buffer_u8, netc_client_return_to_lobby);
-            network_send_raw(socket_id, send_buffer,1);
-            room_goto(rm_lobby);    
+var textx = (vw / 2) - (textw / 2);
+var texty = (vh / 2) - (texth / 2);
+
+var col = c_white;
+
+// In lobby...
+if(!obj_player.in_game) {
+    col = c_gray;
+} else {
+    // In game, therefore we can exit to lobby
+    if (mousey &gt; texty-texth / 2 &amp;&amp; mousey &lt; texty + texth / 2) {
+        if(mousex &gt; textx &amp;&amp; mousex &lt; textx + textw ) {
+            game_end();
         }
     }
 }
 
-text_draw(_x, _y, text, font, c_white, scale, 1, false);
+text_draw(textx, texty, text, font, col, scale, 1, false);
 
 
 </string>
