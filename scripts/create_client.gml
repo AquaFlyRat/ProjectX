@@ -72,9 +72,9 @@ while(true) {
         var _id = buffer_read(buffer, buffer_u32);
         
         var bullet = instance_create(xx, yy, obj_bullet);
-        bullet.dir = dir;
-        bullet.spd = spd;
-        bullet.par = _id;
+            bullet.dir = dir;
+            bullet.spd = spd;
+            bullet.par = _id;
         
         break;
     case netc_puddle:
@@ -96,7 +96,6 @@ while(true) {
         
         if(ds_map_exists(client_map, string(client_id_))) {
             var found_client = client_map[? string(client_id_)];
-            
             found_client.next_x = xx;
             found_client.next_y = yy;
             found_client.prev_x = found_client.x;
