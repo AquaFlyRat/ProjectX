@@ -8,7 +8,7 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="6" enumb="56">
+    <event eventtype="6" enumb="50">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -40,13 +40,13 @@ var textw = text_length(text, font, scale);
 var texth = text_height(font, scale);
 
 var textx = (vw / 2) - (textw / 2);
-var texty = (vh / 2) - (texth / 2)+64;
+var texty = (vh / 2) - (texth / 2);
 
 // In game, therefore we can exit to lobby
 if (mousey &gt; texty-texth / 2 &amp;&amp; mousey &lt; texty + texth / 2) {
-    if(mousex &gt; textx &amp;&amp; mousex &lt; textx + textw ) {
-        game_end();
-    }
+    if mousex&lt;vw*.5{global.maxvol-=.01}
+    if mousex&gt;vw*.5{global.maxvol+=.01}
+    global.maxvol = clamp(global.maxvol,0,1)
 }
 </string>
           </argument>
@@ -70,8 +70,9 @@ if (mousey &gt; texty-texth / 2 &amp;&amp; mousey &lt; texty + texth / 2) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var text = "Return to Lobby";
-if (room == rm_lobby){text = "Exit game";}
+            <string>var text = "&lt;volume: "+string(floor(global.maxvol*100))+"&gt;";
+if (global.maxvol&lt;=0){text = "muted&gt;";}
+if (global.maxvol&gt;=1){text = "&lt;max volume";}
 var font = spr_font_b;
 var scale = 1;
 
@@ -85,9 +86,10 @@ var textw = text_length(text, font, scale);
 var texth = text_height(font, scale);
 
 var textx = (vw / 2) - (textw / 2);
-var texty = (vh / 2) - (texth / 2)+64;
+var texty = (vh / 2) - (texth / 2);
 
 var col = c_white;
+
 text_draw(textx, texty, text, font, col, scale, 1, false);
 </string>
           </argument>

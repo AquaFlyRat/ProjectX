@@ -50,7 +50,7 @@ inside = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(!obj_player.paused &amp;&amp; inside) {
+            <string>if(instance_exists(obj_player) &amp;&amp; !obj_player.paused &amp;&amp; inside) {
     if(has_hover_effect) {
         scale -= 0.25;
         inside = false;

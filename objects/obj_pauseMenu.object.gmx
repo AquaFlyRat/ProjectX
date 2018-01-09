@@ -27,7 +27,9 @@
             <kind>1</kind>
             <string>/// create buttons
 instance_create(0,0,btn_returnToLobby);
-
+instance_create(0,0,btn_fullscreen);
+instance_create(0,0,btn_displaysize);
+instance_create(0,0,btn_volume);
 </string>
           </argument>
         </arguments>
@@ -52,6 +54,15 @@ instance_create(0,0,btn_returnToLobby);
             <kind>1</kind>
             <string>/// destroy buttons
 with(btn_returnToLobby) {
+    instance_destroy();
+}
+with(btn_fullscreen) {
+    instance_destroy();
+}
+with(btn_displaysize) {
+    instance_destroy();
+}
+with(btn_volume) {
     instance_destroy();
 }
 </string>

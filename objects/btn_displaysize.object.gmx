@@ -40,12 +40,33 @@ var textw = text_length(text, font, scale);
 var texth = text_height(font, scale);
 
 var textx = (vw / 2) - (textw / 2);
-var texty = (vh / 2) - (texth / 2)+64;
+var texty = (vh / 2) - (texth / 2)-16;
 
 // In game, therefore we can exit to lobby
 if (mousey &gt; texty-texth / 2 &amp;&amp; mousey &lt; texty + texth / 2) {
-    if(mousex &gt; textx &amp;&amp; mousex &lt; textx + textw ) {
-        game_end();
+    if mousex&lt;vw*.5{
+        with (obj_display){
+            if window_scale&gt;1{
+                window_scale--;
+                alarm[0] = 1;
+            }
+            //update layers
+            surface_resize(application_surface,ideal_width,ideal_height);
+            display_set_gui_size(ideal_width,ideal_height);
+            window_set_size(ideal_width*window_scale,ideal_height*window_scale);
+        }
+    }
+    if mousex&gt;vw*.5{
+        with (obj_display){
+            if ((window_scale+1)*ideal_width&lt;display_get_width()){
+                window_scale++;
+                alarm[0] = 1;
+            }
+            //update layers
+            surface_resize(application_surface,ideal_width,ideal_height);
+            display_set_gui_size(ideal_width,ideal_height);
+            window_set_size(ideal_width*window_scale,ideal_height*window_scale);
+        }
     }
 }
 </string>
@@ -70,8 +91,8 @@ if (mousey &gt; texty-texth / 2 &amp;&amp; mousey &lt; texty + texth / 2) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var text = "Return to Lobby";
-if (room == rm_lobby){text = "Exit game";}
+            <string>var text = "&lt;display size&gt;";
+if (window_get_fullscreen()){text = "max size";}
 var font = spr_font_b;
 var scale = 1;
 
@@ -85,9 +106,10 @@ var textw = text_length(text, font, scale);
 var texth = text_height(font, scale);
 
 var textx = (vw / 2) - (textw / 2);
-var texty = (vh / 2) - (texth / 2)+64;
+var texty = (vh / 2) - (texth / 2)-16;
 
 var col = c_white;
+
 text_draw(textx, texty, text, font, col, scale, 1, false);
 </string>
           </argument>
