@@ -133,13 +133,8 @@ if active ==1 &amp;&amp; cooldown&lt;=0{
             <kind>1</kind>
             <string>///activate
 if active ==0{
-    create_server();
-    active = -1;
-    btn_joinGame.active = -1;
-    /*
     active = 1;
     cooldown = 5;
-    */
 }
 </string>
           </argument>
@@ -164,23 +159,7 @@ if active ==0{
           <argument>
             <kind>1</kind>
             <string>///draw
-if (active = -1) &amp;&amp; (instance_exists(obj_server)){
-    if guifade&lt;1{guifade = lerp(guifade,1,.1)}
-    ///vars
-    var vw = view_wview*obj_view.view_zoom;
-    var vh = view_hview*obj_view.view_zoom
-    //name
-    var p1 = "you have started hosting a server";
-    var p2 = "(open another game to join)";
-    var sc = 1;
-    ///background
-    draw_set_color(c_black);
-    draw_set_alpha(guifade);
-    draw_rectangle(-8,-8,(vw)+8,(vh)+8,false);
-    ///prompt
-    text_draw(vw*.5-text_length(p1,spr_font_a,sc)*.5,vh*.4,p1,spr_font_a,c_white,sc,1*guifade,false);
-    text_draw(vw*.5-text_length(p2,spr_font_a,sc)*.5,vh*.5,p2,spr_font_a,c_white,sc,1*guifade,false);
-    /*
+if(active){
     if guifade&lt;1{guifade = lerp(guifade,1,.1)}
     ///vars
     var vw = view_wview*obj_view.view_zoom;
@@ -197,7 +176,6 @@ if (active = -1) &amp;&amp; (instance_exists(obj_server)){
     ///prompt
     text_draw(vw*.5-text_length(p1,spr_font_a,sc)*.5,vh*.4,p1,spr_font_a,c_white,sc,1*guifade,false);
     text_draw(vw*.5-text_length(p2,spr_font_a,sc)*.5,vh*.5,p2,spr_font_a,c_white,sc,1*guifade,false);
-    */
 }else{
     if guifade&gt;0{guifade = lerp(guifade,0,.1)}
 }
@@ -224,8 +202,7 @@ draw_set_alpha(1);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*
-if (active){
+            <string>if (active){
     create_server();
     active = -1;
 }

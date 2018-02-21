@@ -8,51 +8,6 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="6" enumb="56">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// In lobby...
-var text = "Return to Lobby";
-var font = spr_font_b;
-var scale = 1;
-
-var vz = obj_view.view_zoom;
-var mousex = (mouse_x-view_xview)*vz;
-var mousey = (mouse_y-view_yview)*vz;
-var vw = view_wview*obj_view.view_zoom;
-var vh = view_hview*obj_view.view_zoom;
-
-var textw = text_length(text, font, scale);
-var texth = text_height(font, scale);
-
-var textx = (vw / 2) - (textw / 2);
-var texty = (vh / 2) - (texth / 2)+64;
-
-// In game, therefore we can exit to lobby
-if (mousey &gt; texty-texth / 2 &amp;&amp; mousey &lt; texty + texth / 2) {
-    if(mousex &gt; textx &amp;&amp; mousex &lt; textx + textw ) {
-        game_end();
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
@@ -71,7 +26,6 @@ if (mousey &gt; texty-texth / 2 &amp;&amp; mousey &lt; texty + texth / 2) {
           <argument>
             <kind>1</kind>
             <string>var text = "Return to Lobby";
-if (room == rm_lobby){text = "Exit game";}
 var font = spr_font_b;
 var scale = 1;
 
@@ -85,10 +39,25 @@ var textw = text_length(text, font, scale);
 var texth = text_height(font, scale);
 
 var textx = (vw / 2) - (textw / 2);
-var texty = (vh / 2) - (texth / 2)+64;
+var texty = (vh / 2) - (texth / 2);
 
 var col = c_white;
+
+// In lobby...
+if(!obj_player.in_game) {
+    col = c_gray;
+} else {
+    // In game, therefore we can exit to lobby
+    if (mousey &gt; texty-texth / 2 &amp;&amp; mousey &lt; texty + texth / 2) {
+        if(mousex &gt; textx &amp;&amp; mousex &lt; textx + textw ) {
+            game_end();
+        }
+    }
+}
+
 text_draw(textx, texty, text, font, col, scale, 1, false);
+
+
 </string>
           </argument>
         </arguments>

@@ -133,9 +133,6 @@
       <object>objects\btn_options</object>
       <objects name="hud">
         <object>objects\btn_returnToLobby</object>
-        <object>objects\btn_fullscreen</object>
-        <object>objects\btn_displaysize</object>
-        <object>objects\btn_volume</object>
       </objects>
     </objects>
     <objects name="net">
