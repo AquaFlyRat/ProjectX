@@ -87,6 +87,14 @@
         <script>scripts\client_fired_bullet_dispatch.gml</script>
       </scripts>
     </scripts>
+    <scripts name="brian">
+      <script>scripts\b_create_server.gml</script>
+      <script>scripts\b_create_client.gml</script>
+      <script>scripts\b_connect_client_to_server.gml</script>
+      <script>scripts\b_on_server_recieve_connect.gml</script>
+      <script>scripts\b_server_get_number_of_clients_connected.gml</script>
+      <script>scripts\b_on_server_recieve_disconnect.gml</script>
+    </scripts>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shd_vanilla.shader</shader>
@@ -152,6 +160,10 @@
     <objects name="menu">
       <object>objects\obj_intro</object>
       <object>objects\obj_pauseMenu</object>
+    </objects>
+    <objects name="brian">
+      <object>objects\obj_b_server</object>
+      <object>objects\obj_b_client</object>
     </objects>
   </objects>
   <rooms name="rooms">

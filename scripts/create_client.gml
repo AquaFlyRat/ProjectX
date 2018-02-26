@@ -25,6 +25,8 @@ with(client) {
 
 
 #define client_recieve_data
+
+
 var eventid = ds_map_find_value(async_load, "id");
 if(eventid == socket_id) {
 

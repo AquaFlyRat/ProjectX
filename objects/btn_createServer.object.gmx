@@ -203,7 +203,13 @@ draw_set_alpha(1);
           <argument>
             <kind>1</kind>
             <string>if (active){
-    create_server();
+//    create_server();
+
+    var server = b_create_server(std_port, max_clients);
+    var client = b_create_client();
+    b_connect_client_to_server("127.0.0.1", std_port, client);
+    
+    
     active = -1;
 }
 </string>
