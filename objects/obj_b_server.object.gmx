@@ -75,6 +75,9 @@ if (socket_id == receiving_id) {
         break;
     
     case network_type_data:
+        var sock_id = ds_map_find_value(async_load, "id");
+        var buffer = ds_map_find_value(async_load, "buffer");
+        
         break;
     }
 }
