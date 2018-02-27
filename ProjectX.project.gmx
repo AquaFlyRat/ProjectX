@@ -94,6 +94,7 @@
       <script>scripts\b_on_server_recieve_connect.gml</script>
       <script>scripts\b_server_get_number_of_clients_connected.gml</script>
       <script>scripts\b_on_server_recieve_disconnect.gml</script>
+      <script>scripts\b_send_player_move_data_to_server.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">

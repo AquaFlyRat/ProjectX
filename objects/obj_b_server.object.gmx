@@ -73,6 +73,9 @@ if (socket_id == receiving_id) {
         var disconnecting_sock_id = ds_map_find_value(async_load, "socket");
         b_on_server_recieve_disconnect(self, disconnecting_sock_id);
         break;
+    
+    case network_type_data:
+        break;
     }
 }
 </string>

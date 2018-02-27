@@ -7,3 +7,6 @@ var client_sock = client_obj.socket_id;
 var server_sock = network_connect_raw(client_sock, ip, port);
 
 client_obj.server_socket_id = server_sock;
+
+// Start the timer that will upload clients data to the server
+client_obj.alarm[0] = update_spd;
